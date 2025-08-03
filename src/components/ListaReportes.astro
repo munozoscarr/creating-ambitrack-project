@@ -1,0 +1,58 @@
+---
+---
+<div class="bg-white dark:bg-black p-4 rounded shadow">
+  <ul id="lista-reportes" class="space-y-4"></ul>
+</div>
+
+<script type="module">
+  const lista = document.getElementById('lista-reportes');
+
+  function render() {
+    const reportes = JSON.parse(localStorage.getItem('reportes') || '[]');
+
+    lista.innerHTML = "";
+
+    reportes.forEach((reporte, index) => {
+      const item = document.createElement("li");
+      item.className = "border border-gray-300 dark:border-gray-600 p-1 rounded";
+
+      item.innerHTML = `
+        <div class="bg-white dark:bg-black p-4 rounded shadow mb-4 text-black dark:text-white">
+          <p><strong>Tipo:</strong> ${reporte.tipo}</p>
+          <p><strong>Zona:</strong> ${reporte.zona}</p>
+          <p><strong>Descripción:</strong> ${reporte.descripcion}</p>
+          <p><strong>Estado:</strong> ${reporte.estado}</p>
+          <div class="mt-2 space-x-2">
+            <button data-editar="${index}" class="bg-yellow-400 hover:bg-yellow-500 text-black px-2 py-1 rounded">
+              Editar
+            </button>
+            <button data-eliminar="${index}" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded">
+              Eliminar
+            </button>
+          </div>
+        </div>
+
+      `;
+
+      lista.appendChild(item);
+    });
+  }
+
+  window.addEventListener('storage', render);
+  window.addEventListener('DOMContentLoaded', render);
+
+  lista.addEventListener('click', (e) => {
+    if (e.target.dataset.editar !== undefined) {
+      const index = parseInt(e.target.dataset.editar);
+      window.dispatchEvent(new CustomEvent('editar-reporte', { detail: index }));
+    }
+
+    if (e.target.dataset.eliminar !== undefined) {
+      const index = parseInt(e.target.dataset.eliminar);
+      const reportes = JSON.parse(localStorage.getItem('reportes') || '[]');
+      reportes.splice(index, 1);
+      localStorage.setItem('reportes', JSON.stringify(reportes));
+      render();
+    }
+  });
+</script>
