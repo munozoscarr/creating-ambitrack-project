@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FormularioReporte from "../components/FormularioReporte.astro";
+import ListaReportes from "../components/ListaReportes.astro";
+---
+
+<Layout title="Reportes Ambientales" description="Reporta incidentes ambientales para revisión interna.">
+  <h1 class="text-2xl font-bold mb-4">📢 Reporta un incidente ambiental</h1>
+  <FormularioReporte />
+
+  <hr class="my-6" />
+
+  <h2 class="text-xl font-semibold mb-4">📋 Reportes registrados</h2>
+  <ListaReportes />
+</Layout>
