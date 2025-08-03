@@ -1,0 +1,121 @@
+<section
+    class="h-(--calc-section) w-full flex justify-center items-center flex-col"
+>
+    <div class="flex items-center pt-6 justify-center w-full relative">
+        <div class="animation-opacity absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" >
+            <svg xmlns="http://www.w3.org/2000/svg" height="150px" viewBox="0 -960 960 960" width="auto" fill="currentcolor"><path d="M480-105.5q76.03-71.44 118.77-137.17 42.73-65.73 42.73-111.38 0-68.95-46.91-118.2t-114.5-49.25q-67.59 0-114.34 49.27T319-353.68q0 45.18 42.75 111.18T480-105.5Zm.17 34.5Q388-155 340.75-226.13q-47.25-71.12-47.25-127.8 0-79.57 54.09-136.32T480.09-547q78.41 0 132.66 56.71Q667-433.59 667-354q0 63-49.58 131T480.17-71Zm-.14-250.5q15.97 0 27.47-11.28 11.5-11.28 11.5-27.25t-11.53-27.47q-11.53-11.5-27.5-11.5t-27.22 11.53q-11.25 11.53-11.25 27.5t11.28 27.22q11.28 11.25 27.25 11.25ZM339-680l-17-17q33.5-26.5 74.02-41.25 40.53-14.75 84-14.75 43.48 0 83.98 14.75 40.5 14.75 74.5 41.25L621-680q-30.5-23.5-66.84-35.5t-74.16-12q-37.82 0-74.16 12-36.34 12-66.84 35.5ZM226-793l-17-18q56.5-49 126.52-75.5 70.03-26.5 144.5-26.5 75.48 0 145.52 26.38Q695.58-860.23 752.5-810L734-792q-53-46.76-118-71.13-65-24.37-136-24.37-70 0-135.5 23.87T226-793Zm254 433Z"/></svg>
+        </div>
+        <div id="mapa" class="w-[400px] h-[400px] z-10 rounded-2xl"></div>
+    </div>
+    <div class="flex items-center justify-center relative flex-1 w-full">
+        <button
+            id="btnUbicacion"
+            aria-label="reportar"
+            class="w-[60px] h-[60px] hover:scale-125 rounded-full bg-red-500 cursor-pointer flex items-center justify-center"
+            title="Reportar"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="40px"
+                viewBox="0 -960 960 960"
+                width="40px"
+                fill="currentcolor"
+                ><path
+                    d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm-40-160h80v-240h-80v240ZM330-120 120-330v-300l210-210h300l210 210v300L630-120H330Zm34-80h232l164-164v-232L596-760H364L200-596v232l164 164Zm116-280Z"
+                ></path></svg
+            >
+        </button>
+    </div>
+</section>
+
+<style>
+    #btnUbicacion{
+        transition: all 200ms;
+    }
+    .animation-opacity{
+        animation-name: animationopacity;
+        animation-duration: 1s;
+    }
+    @keyframes animationopacity {
+        0%{
+            transform: translateY(190px);
+            scale: 0.8;
+            opacity: 0.333;
+        }
+        50%{
+            transform: translateY(0);
+            scale: 1;
+            opacity: 1;
+        }
+
+        51%{
+            transform: rotate(15deg);
+        }
+
+        61%{
+            transform: rotate(-15deg);
+        }
+
+        70%{
+            transform: rotate(0deg);
+        }
+
+        71%{
+            transform: rotate(15deg);
+        }
+        81%{
+            transform: rotate(-15deg);
+        }
+
+        100%{
+            transform: translateY(0);
+            scale: 1;
+            opacity: 1;
+        }
+
+    }
+    @media (width < 456px) {
+        #mapa{
+            width: 100%;
+        }	
+	}
+</style>
+
+<script>
+    import L from "leaflet";
+    const boton = document.getElementById("btnUbicacion") as HTMLButtonElement;
+    const divMapa = document.getElementById("mapa") as HTMLDivElement;
+    let mapa: L.Map | null = null;
+    boton.addEventListener("click", () => {
+        if (!navigator.geolocation) {
+            alert("Tu navegador no soporta geolocalización.");
+            return;
+        }
+        navigator.geolocation.getCurrentPosition(
+            (pos: GeolocationPosition) => {
+                const lat = pos.coords.latitude;
+                const lon = pos.coords.longitude;
+                // Si el mapa ya existe, lo actualizamos
+                if (mapa) {
+                    mapa.setView([lat, lon], 13);
+                } else {
+                    mapa = L.map(divMapa).setView([lat, lon], 13);
+                    L.tileLayer(
+                        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                        {
+                            attribution: "© OpenStreetMap contributors",
+                        },
+                    ).addTo(mapa);
+                }
+                // Añadir marcador
+                L.marker([lat, lon])
+                    .addTo(mapa)
+                    .bindPopup("lugar del reporte")
+                    .openPopup();
+            },
+            (error: GeolocationPositionError) => {
+                alert("Error al obtener ubicación: " + error.message);
+            },
+        );
+    });
+</script>
