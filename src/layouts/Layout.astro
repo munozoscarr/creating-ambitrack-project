@@ -2,6 +2,17 @@
 import "../styles/global.css";
 import "leaflet/dist/leaflet.css";
 const { title, description } = Astro.props;
+
+const list_link = [
+	{
+		name: "Reportar",
+		href: "/report",
+	},
+	{
+		name: "Ver Reportes",
+		href: "/reports",
+	},
+];
 ---
 
 <!doctype html>
@@ -15,7 +26,7 @@ const { title, description } = Astro.props;
 	</head>
 	<body>
 		<header
-			class="w-full h-header-container fixed top-0 left-0 right-0 z-40 bg-background-light dark:bg-background-dark border-b-[1px] border-border-b-light dark:border-b-border-darck"
+			class="w-full h-header-container fixed top-0 left-0 right-0 z-40 bg-background-light dark:bg-background-dark border-b-[1px] border-border-light dark:border-b-border-darck"
 		>
 			<div class="px-5 h-full flex items-center justify-between">
 				<div class="flex gap-5">
@@ -46,7 +57,22 @@ const { title, description } = Astro.props;
 				class="w-aside-container border-r-[1px] border-r-border-light dark:border-r-border-darck h-screen sticky top-0 left-0 bottom-0 max-lg:hidden"
 			>
 				<div class="pt-[60px] h-full">
-					<nav class="h-(--calc-aside) overflow-y-auto p-5"></nav>
+					<nav class="h-(--calc-aside) overflow-y-auto p-5">
+						<ul class="flex flex-col gap-2.5" >
+							{
+								list_link.map((items) => (
+									<li>
+										<a
+											href={items.href}
+											class="block py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-700 rounded"
+										>
+											{items.name}
+										</a>
+									</li>
+								))
+							}
+						</ul>
+					</nav>
 				</div>
 			</div>
 			<div class="flex-1 pt-[60px]">
@@ -132,6 +158,22 @@ const { title, description } = Astro.props;
 			id="aside-container-mb"
 			class="w-aside-container fixed left-0 bottom-0 top-0 h-screen bg-background-light z-50 dark:bg-background-dark lg:hidden -translate-x-full"
 		>
+			<nav class="h-(--calc-aside) overflow-y-auto p-5">
+				<ul class="flex flex-col gap-2.5">
+					{
+						list_link.map((items) => (
+							<li>
+								<a
+									href={items.href}
+									class="block py-2 px-4"
+								>
+									{items.name}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
 		</div>
 	</body>
 </html>
@@ -148,18 +190,22 @@ const { title, description } = Astro.props;
 		--calc-aside: calc(100vh - 60px);
 		--calc-section: calc(100vh - 60px);
 	}
+
 	html {
 		scroll-behavior: smooth;
 	}
+
 	body {
 		margin: 0;
 		width: 100%;
 		background-color: var(--background-color-light);
 		color: var(--color-light);
 	}
+
 	#aside-container-mb {
 		transition: all 200ms;
 	}
+
 	@media (prefers-color-scheme: dark) {
 		body {
 			background-color: var(--background-color-dark);
