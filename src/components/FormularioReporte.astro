@@ -1,6 +1,3 @@
----
----
-
 <div class="bg-white dark:bg-gray-900 p-4 rounded shadow mb-4">
   <form id="formulario-reporte">
     <label class="block mb-2">
@@ -20,47 +17,37 @@
     </button>
   </form>
 </div>
-
-
 <script type="module">
   let reportes = JSON.parse(localStorage.getItem('reportes') || '[]');
   let editIndex = null;
-
   const form = document.getElementById('formulario-reporte');
   const tipo = document.getElementById('tipo');
   const zona = document.getElementById('zona');
   const descripcion = document.getElementById('descripcion');
-
   function guardarEnLocalStorage() {
     localStorage.setItem('reportes', JSON.stringify(reportes));
     window.dispatchEvent(new Event('storage')); // Para actualizar ListaReportes
   }
-
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-
     const nuevoReporte = {
       tipo: tipo.value.trim(),
       zona: zona.value.trim(),
       descripcion: descripcion.value.trim(),
       estado: "En revisión"
     };
-
     if (editIndex !== null) {
       reportes[editIndex] = nuevoReporte;
       editIndex = null;
     } else {
       reportes.push(nuevoReporte);
     }
-
     guardarEnLocalStorage();
-
     // Limpiar campos
     tipo.value = "";
     zona.value = "";
     descripcion.value = "";
   });
-
   // Escuchar evento personalizado para editar desde ListaReportes
   window.addEventListener('editar-reporte', (e) => {
     const index = e.detail;

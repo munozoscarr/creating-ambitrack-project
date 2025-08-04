@@ -3,10 +3,8 @@
 @theme {
     --color-background-dark: #030712;
 	--color-dark: #ffffff;
-	--color-border-darck: rgba(236, 236, 236, 0.582);
 	--color-background-light: #ffffff;
 	--color-light: #000000;
-	--color-border-light: rgba(54, 54, 54, 0.301);
 	--height-header-container: 60px;
 	--width-aside-container: 18rem;
 }

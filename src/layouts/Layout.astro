@@ -3,17 +3,6 @@ import "../styles/global.css";
 import "leaflet/dist/leaflet.css";
 import SidebarMenu from "../components/SidebarMenu.astro";
 const { title, description } = Astro.props;
-
-const list_link = [
-	{
-		name: "Reportar",
-		href: "/report",
-	},
-	{
-		name: "Ver Reportes",
-		href: "/reports",
-	},
-];
 ---
 
 <!doctype html>
@@ -21,13 +10,13 @@ const list_link = [
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/Ambicon.svg"/>
+		<link rel="icon" type="image/svg+xml" href="/Ambicon.svg" />
 		<meta name="description" content={description} />
 		<title>{title}</title>
 	</head>
 	<body>
 		<header
-			class="w-full h-header-container fixed top-0 left-0 right-0 z-40 bg-background-light dark:bg-background-dark border-b-[1px] border-border-light dark:border-b-border-darck"
+			class="w-full h-header-container fixed top-0 left-0 right-0 z-40 bg-background-light dark:bg-background-dark border-b-[1px] border-border-light dark:border-white/10"
 		>
 			<div class="px-5 h-full flex items-center justify-between">
 				<div class="flex gap-5 flex-items-center">
@@ -47,7 +36,11 @@ const list_link = [
 							></path></svg
 						>
 					</button>
-					<img src="/public/Ambicon.svg" class="max-h-[35px] max-w-[35px] mr-3px" alt="">
+					<img
+						src="/public/Ambicon.svg"
+						class="max-h-[35px] max-w-[35px] mr-3px rotate-90"
+						alt=""
+					/>
 					<a href="/" class="text-xl font-bold" aria-label="ambitrack"
 						>AmbiTrack</a
 					>
@@ -56,28 +49,9 @@ const list_link = [
 		</header>
 		<div class="flex w-full relative">
 			<div
-				class="pt-[75px] w-aside-container border-r-[1px] border-r-border-light dark:border-r-border-darck h-screen sticky top-0 left-0 bottom-0 max-lg:hidden"
-			> <SidebarMenu />
-
-			
-				<div class="pt-[60px] h-full">
-					<nav class="h-(--calc-aside) overflow-y-auto p-5">
-						<ul class="flex flex-col gap-2.5" >
-							{
-								list_link.map((items) => (
-									<li>
-										<a
-											href={items.href}
-											class="block py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-700 rounded"
-										>
-											{items.name}
-										</a>
-									</li>
-								))
-							}
-						</ul>
-					</nav>
-				</div>
+				class="pt-[60px] w-aside-container border-r-[1px] border-r-border-light dark:border-white/10 h-screen sticky top-0 left-0 bottom-0 max-lg:hidden"
+			>
+				<SidebarMenu />
 			</div>
 			<div class="flex-1 pt-[60px]">
 				<main class="px-5">
@@ -162,6 +136,7 @@ const list_link = [
 			id="aside-container-mb"
 			class="w-aside-container fixed left-0 bottom-0 top-0 h-screen bg-background-light z-50 dark:bg-background-dark lg:hidden -translate-x-full"
 		>
+			<SidebarMenu />
 		</div>
 	</body>
 </html>
@@ -169,10 +144,8 @@ const list_link = [
 	:root {
 		--background-color-dark: #030712;
 		--color-dark: #ffffff;
-		--border-darck: rgba(236, 236, 236, 0.582);
 		--background-color-light: #ffffff;
 		--color-light: #000000;
-		--border-light: rgba(54, 54, 54, 0.301);
 		--height-header-container: 60px;
 		--width-aside-container: 18rem;
 		--calc-aside: calc(100vh - 60px);

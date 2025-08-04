@@ -1,12 +1,56 @@
 <!-- SidebarMenu.astro -->
-<nav class="space-y-4">
-  <a href="/" class="block text-lg font-semibold hover:text-green-500">Inicio</a>
-  <a href="/sensores" class="block text-lg font-semibold hover:text-green-500">Reciente</a>
-  <a href="/reportes" class="block text-lg font-semibold hover:text-green-500">Reportes</a>
-  <a href="/reportes" class="block text-lg font-semibold hover:text-green-500">Sobre Nosotros</a>
-
-  <div class="mt-6 border-t border-border-light dark:border-border-darck pt-4">
-    <a href="/perfil" class="pb-[10px] block text-sm hover:text-blue-400">Mi perfil</a>
-    <a href="/cerrar-sesion" class="block text-sm hover:text-red-400">Cerrar sesión</a>
-  </div>
+<nav class="h-full overflow-y-auto">
+  <ol class="w-full flex flex-col gap-5 py-6">
+    <li>
+      <a
+        href="/"
+        class="inline-flex text-lg font-semibold hover:text-green-500 ml-3"
+        aria-label="Inicio">Inicio</a
+      >
+    </li>
+    <li>
+      <a
+        href="/reciente"
+        class="inline-flex text-lg font-semibold hover:text-green-500 ml-3"
+        aria-label="Reciente">Reciente</a
+      >
+    </li>
+    <li>
+      <a
+        href="/reportes"
+        class="inline-flex text-lg font-semibold hover:text-green-500 ml-3"
+        aria-label="Reportes">Reportes</a
+      >
+    </li>
+    <li>
+      <a
+        href="/about"
+        class="inline-flex text-lg font-semibold hover:text-green-500 ml-3"
+        aria-label="Sobre Nosotros">Sobre Nosotros</a
+      >
+    </li>
+  </ol>
+  <ol
+    class="border-t border-border-light dark:border-white/10 py-6 w-full flex flex-col gap-5"
+  >
+    <li>
+      <a
+        href="/perfil"
+        class="inline-flex text-lg font-semibold hover:text-blue-400 ml-3"
+        aria-label="Mi Perfil">Mi perfil</a
+      >
+    </li>
+    <li>
+      <a
+        href="/cerrar-sesion"
+        class="inline-flex text-lg font-semibold text-red-400 ml-3"
+        aria-label="Cerrar sesion">Cerrar sesión</a
+      >
+    </li>
+  </ol>
 </nav>
+<style>
+  li {
+    list-style: none;
+  }
+</style>
