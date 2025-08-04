@@ -5,12 +5,13 @@ import FormularioReporte from "../components/FormularioReporte.astro";
 import ListaReportes from "../components/ListaReportes.astro";
 ---
 
-<Layout title="Reportes Ambientales" description="Reporta incidentes ambientales para revisión interna.">
-  <h1 class="text-2xl font-bold mb-4">📢 Reporta un incidente ambiental</h1>
-  <FormularioReporte />
-  <hr class="my-6" />
-
-  <h2 class="text-xl font-semibold mb-4">📋 Reportes registrados</h2>
-  <ListaReportes />
-</div>
+<Layout title="Ambientales / Reportes"  description="Reporta incidentes ambientales para revisión interna.">
+  <section class="flex flex-col items-center gap-7 pt-7" >
+    <h1 class="text-2xl font-bold mb-4 text-center">📢 Reporta un incidente ambiental</h1>
+    <FormularioReporte />
+    <hr class="my-6" />
+  
+    <h2 class="text-xl font-semibold mb-4">📋 Reportes registrados</h2>
+    <ListaReportes />
+  </section>
 </Layout>

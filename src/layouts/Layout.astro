@@ -2,6 +2,8 @@
 import "../styles/global.css";
 import "leaflet/dist/leaflet.css";
 import SidebarMenu from "../components/SidebarMenu.astro";
+import Login from "../pages/login.astro";
+
 const { title, description } = Astro.props;
 ---
 
@@ -15,6 +17,7 @@ const { title, description } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
+		<!-- <Login /> -->
 		<header
 			class="w-full h-header-container fixed top-0 left-0 right-0 z-40 bg-background-light dark:bg-background-dark border-b-[1px] border-border-light dark:border-white/10"
 		>
@@ -49,16 +52,9 @@ const { title, description } = Astro.props;
 		</header>
 		<div class="flex w-full relative">
 			<div
-				class="pt-[75px] w-aside-container border-r-[1px] border-r-border-light dark:border-r-border-darck h-screen sticky top-0 left-0 bottom-0 max-lg:hidden"
-			> <SidebarMenu />
-			
-				<div class="pt-[60px] h-full">
-					<nav class="h-(--calc-aside) overflow-y-auto p-5">
-						<ul class="flex flex-col gap-2.5" >
-							
-						</ul>
-					</nav>
-				</div>
+				class="pt-[60px] w-aside-container border-r-[1px] border-r-border-light dark:border-white/10 h-screen sticky top-0 left-0 bottom-0 max-lg:hidden"
+			>
+			<SidebarMenu />
 			</div>
 			<div class="flex-1 pt-[60px]">
 				<main class="px-5">
@@ -143,6 +139,7 @@ const { title, description } = Astro.props;
 			id="aside-container-mb"
 			class="w-aside-container fixed left-0 bottom-0 top-0 h-screen bg-background-light z-50 dark:bg-background-dark lg:hidden -translate-x-full"
 		>
+		<SidebarMenu />
 		</div>
 	</body>
 </html>

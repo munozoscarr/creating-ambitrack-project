@@ -1,31 +1,15 @@
----
-import "../styles/login.css";
----
 
-<html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Login</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    </head>
-    <body>
-        <!-- Video de fondo -->
-        <video id="video-fondo" autoplay muted loop playsinline>
-            <source src="/videos/fondo-predeterminado.mp4" type="video/mp4" />
-        </video>
+<video class="z-[99] fixed inset-0  "  autoplay muted loop playsinline>
+    <source src="/videos/fondo-predeterminado.mp4" type="video/mp4" />
+</video>
 
-        <!-- Contenedor centrado -->
-        <div class="contenedor">
-            <div class="contenedor-login">
-                <h1>Iniciar sesión</h1>
-                <input id="usuario" placeholder="Usuario" />
-                <input id="clave" placeholder="Contraseña" type="password" />
-                <button onclick="login()">Entrar</button>
-                <button onclick="location.href='/'"> Volver </button>
-            </div>
-        </div>
-
-        <!-- Script -->
-        <script src="../js/login.js"></script>
-    </body>
-</html>
+<div class="contenedor">
+    <div class="contenedor-login">
+        <h1>Iniciar sesión</h1>
+        <input id="usuario" placeholder="Usuario" />
+        <input id="clave" placeholder="Contraseña" type="password" />
+        <button onclick="login()">Entrar</button>
+        <button onclick="location.href='/'"> Volver </button>
+    </div>
+</div>
+<script src="../js/login.js"></script>

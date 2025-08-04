@@ -1,8 +1,8 @@
 ---
 ---
 
-<div class="bg-white dark:bg-gray-900 p-4 rounded shadow mb-4">
-  <form id="formulario-reporte">
+<div class="bg-white dark:bg-gray-900 p-4 rounded w-full shadow max-w-[500px] mb-4">
+  <form id="formulario-reporte" class="flex flex-col w-full" >
     <label class="block mb-2">
       <h2 class="text-black dark:text-white">Tipo de incidente:</h2>
       <input type="text" id="tipo" class="bg-white dark:bg-gray-800 text-black dark:text-white border border-gray-300 dark:border-gray-600 p-2 w-full rounded" required />
@@ -30,6 +30,10 @@
   const tipo = document.getElementById('tipo');
   const zona = document.getElementById('zona');
   const descripcion = document.getElementById('descripcion');
+
+  function guardarReporte(reporte) {
+    reportes.push(reporte);
+  }
 
   function guardarEnLocalStorage() {
     localStorage.setItem('reportes', JSON.stringify(reportes));
@@ -71,7 +75,6 @@
     descripcion.value = r.descripcion;
 
     // Cambia el modo a edición y guarda el índice
-    modoEdicion = true;
-    indiceEditar = index;
+    editIndex = index;
   });
 </script>
