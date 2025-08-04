@@ -3,7 +3,6 @@ import "../styles/global.css";
 import "leaflet/dist/leaflet.css";
 import SidebarMenu from "../components/SidebarMenu.astro";
 import Login from "../pages/login.astro";
-
 const { title, description } = Astro.props;
 ---
 
@@ -19,7 +18,7 @@ const { title, description } = Astro.props;
 	<body>
 		<!-- <Login /> -->
 		<header
-			class="w-full h-header-container fixed top-0 left-0 right-0 z-40 bg-background-light dark:bg-background-dark border-b-[1px] border-border-light dark:border-white/10"
+			class="w-full h-header-container fixed top-0 left-0 right-0 z-40 bg-background-light dark:bg-background-dark border-b-[1px] border-black/5 dark:border-white/10"
 		>
 			<div class="px-5 h-full flex items-center justify-between">
 				<div class="flex gap-5 items-center"	>
@@ -52,7 +51,7 @@ const { title, description } = Astro.props;
 		</header>
 		<div class="flex w-full relative">
 			<div
-				class="pt-[60px] w-aside-container border-r-[1px] border-r-border-light dark:border-white/10 h-screen sticky top-0 left-0 bottom-0 max-lg:hidden"
+				class="pt-[60px] w-aside-container border-r-[1px] border-black/5 dark:border-white/10 h-screen sticky top-0 left-0 bottom-0 max-lg:hidden"
 			>
 			<SidebarMenu />
 			</div>

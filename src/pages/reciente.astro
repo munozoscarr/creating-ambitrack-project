@@ -2,5 +2,27 @@
 import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="AmbiTrack / recientes" description="AmbiTrack es la herramienta para reportar situaciones que amenacen el medio ambiente o representen riesgos naturales. Contribuye a proteger nuestro entorno informando de manera rápida y efectiva.">
-    
+    <section class="flex flex-col items-center py-16 gap-16 " >
+        <h1 class="text-4xl font-bold" >Recientes</h1>
+        <iframe  src="https://www.youtube.com/embed/YA9Zos30bwY?si=pUGncdFv3jmRm7Hv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <br class="" >
+        <iframe src="https://www.youtube.com/embed/HKbO5ykNuN0?si=jKRPmPI0R1-gzDFv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> 
+    </section>
 </Layout>
+<style>
+    iframe{
+        width: 100%;
+        max-width: 560px;
+        height: 410px;
+        border-radius: 32px;
+        transition: all 90ms linear;
+    }
+    iframe:hover{
+        scale: 1.033;
+    }
+    @media (prefers-color-scheme: dark) {
+        iframe{
+            border: 2px solid rgb(255, 255, 255);
+        }
+    }
+</style>
