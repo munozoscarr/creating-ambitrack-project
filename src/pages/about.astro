@@ -1,7 +1,68 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Report from "../components/Report.astro";
+import Layout from "../layouts/Layout.astro";
+import "../styles/about.css";
 ---
-<Layout
-<h1> Sobre Nosotros</h1>
-<p>Tratamos de reunir datos y que estos ayuden a los demas</p>>
+
+<Layout>
+
+
+
+    <video
+        autoplay
+        loop
+        muted
+        playsinline
+        class="fixed top-0 left-0 w-full h-full object-cover -z-10 "
+    >
+        <source src="/videos/fondo-predeterminado.mp4" type="video/mp4" />
+    </video>
+
+    <section class="info-section">
+        <div class="tarjetas-contenedor">
+            <div class="card">
+                <h3>¿Qué es AmbiTrack?</h3>
+                <p>
+                    AmbiTrack es una herramienta digital diseñada para empoderar
+                    a los ciudadanos y fomentar la protección ambiental mediante
+                    el reporte de incidentes ecológicos y naturales.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>¿Por qué usarla?</h3>
+                <p>
+                    Porque cada reporte ayuda a construir una base de datos útil
+                    para entidades ambientales y contribuye a una respuesta más
+                    rápida y efectiva ante emergencias ecológicas.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>¿Quiénes somos?</h3>
+                <p>
+                    Un grupo de jóvenes comprometidos con el cambio: Oscar,
+                    Duver, Catalina y JH. Creemos que la tecnología puede ser
+                    una aliada del medio ambiente.
+                </p>
+            </div>
+            <div class="card">
+                <h3>Qué no se debe reportar </h3>
+                <p>
+                    Evita reportes falsos, bromas, o situaciones no relacionadas con el medio ambiente. Usa AmbiTrack con responsabilidad.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center mt-12 text-sm text-gray-300">
+        &copy; AmbiTrack - Todos los derechos reservados
+    </footer>
 </Layout>
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-..."
+    crossorigin="anonymous"
+/>
