@@ -1,57 +1,80 @@
 ---
+// ListaReportes.astro
 ---
-<div class="bg-white dark:bg-black p-4 rounded shadow">
+
+<div class="backdrop-blur-3xl p-4 rounded shadow">
+  <!-- Lista donde se insertarán dinámicamente los reportes -->
   <ul id="lista-reportes" class="space-y-4"></ul>
 </div>
 
 <script type="module">
+  // Obtenemos la lista <ul> del DOM donde se mostrarán los reportes
   const lista = document.getElementById('lista-reportes');
 
+  // Función que renderiza todos los reportes desde localStorage
   function render() {
+    // Cargamos los reportes almacenados o un arreglo vacío si no hay nada guardado
     const reportes = JSON.parse(localStorage.getItem('reportes') || '[]');
-
+    
+    // Limpiamos la lista antes de volver a renderizar
     lista.innerHTML = "";
 
+    // Recorremos cada reporte y lo convertimos en un elemento <li>
     reportes.forEach((reporte, index) => {
       const item = document.createElement("li");
+      // Aplicamos estilos de borde y espaciado
       item.className = "border border-gray-300 dark:border-gray-600 p-1 rounded";
 
+      // Usamos innerHTML para crear el contenido visual del reporte
       item.innerHTML = `
-        <div class="bg-white dark:bg-black p-4 rounded shadow mb-4 text-black dark:text-white">
+        <div class=" p-4 rounded shadow mb-4 backdrop-blur-3xl">
           <p><strong>Tipo:</strong> ${reporte.tipo}</p>
           <p><strong>Zona:</strong> ${reporte.zona}</p>
           <p><strong>Descripción:</strong> ${reporte.descripcion}</p>
           <p><strong>Estado:</strong> ${reporte.estado}</p>
+          <p><strong>Fecha:</strong> ${reporte.fecha || "Sin fecha"}</p>
           <div class="mt-2 space-x-2">
+            <!-- Botón para editar el reporte -->
             <button data-editar="${index}" class="bg-yellow-400 hover:bg-yellow-500 text-black px-2 py-1 rounded">
               Editar
             </button>
+            <!-- Botón para eliminar el reporte -->
             <button data-eliminar="${index}" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded">
               Eliminar
             </button>
           </div>
         </div>
-
       `;
 
+      // Agregamos el elemento <li> a la lista <ul>
       lista.appendChild(item);
     });
   }
 
+  // Actualiza la lista si cambia el localStorage (por ejemplo, desde otro tab)
   window.addEventListener('storage', render);
+
+  // Llama a render al cargar la página
   window.addEventListener('DOMContentLoaded', render);
 
+  // Escucha clics dentro de la lista para saber si se quiere editar o eliminar un reporte
   lista.addEventListener('click', (e) => {
+    // Si se hizo clic en un botón de editar
     if (e.target.dataset.editar !== undefined) {
       const index = parseInt(e.target.dataset.editar);
+      // Dispara un evento personalizado que puede ser escuchado por otro componente
       window.dispatchEvent(new CustomEvent('editar-reporte', { detail: index }));
     }
 
+    // Si se hizo clic en un botón de eliminar
     if (e.target.dataset.eliminar !== undefined) {
       const index = parseInt(e.target.dataset.eliminar);
       const reportes = JSON.parse(localStorage.getItem('reportes') || '[]');
+      // Eliminamos el reporte del arreglo
       reportes.splice(index, 1);
+      // Guardamos el nuevo arreglo sin el reporte eliminado
       localStorage.setItem('reportes', JSON.stringify(reportes));
+      // Volvemos a renderizar la lista
       render();
     }
   });

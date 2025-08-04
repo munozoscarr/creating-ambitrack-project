@@ -1,0 +1,81 @@
+---
+---
+<div class="contenedor"></div>
+
+
+<form id="formularioVerificados" class=" backdrop-blur-3xl">
+  <div class="mb-4 ">
+    <label class="block mb-1">Descripción del reporte verificado</label>
+    <input type="text" id="descripcionVerificado" class="w-full border p-2 rounded" placeholder="Ej: Se confirmo el arbol caido" />
+  </div>
+  <div class="mb-4">
+    <label class="block mb-1">Verificado por</label>
+    <input type="text" id="verificadoPor" class="w-full border p-2 rounded" placeholder="Nombre del verificador" />
+  </div>
+  <button type="button" onclick="btnSubirVerificado()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Subir Reporte Verificado</button>
+</form>
+
+<script type="module">
+  let verificados = JSON.parse(localStorage.getItem("verificados")) || [];
+  let editando = -1;
+
+  function mostrarVerificados() {
+    const lista = document.getElementById("listaVerificados");
+    lista.innerHTML = "";
+
+    verificados.forEach((item, index) => {
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+        <td class="border px-4 py-2">${item.descripcion}</td>
+        <td class="border px-4 py-2">${item.verificadoPor}</td>
+        <td class="border px-4 py-2">
+          <button onclick="editarVerificado(${index})" class="text-white px-4 py-2 rounded bg-yellow-800 hover:bg-amber-50 hover:text-black">Editar</button>
+          <button onclick="eliminarVerificado(${index})" class="text-white px-4 py-2 rounded bg-red-800 hover:bg-amber-50 hover:text-black">Eliminar</button>
+        </td>
+      `;
+      lista.appendChild(fila);
+    });
+  }
+
+  window.btnSubirVerificado = function () {
+    const descripcion = document.getElementById("descripcionVerificado").value.trim();
+    const verificadoPor = document.getElementById("verificadoPor").value.trim();
+
+    if (descripcion === "" || verificadoPor === "") {
+      alert("Todos los campos son obligatorios");
+      return;
+    }
+
+    const nuevoReporte = { descripcion, verificadoPor };
+
+    if (editando === -1) {
+      verificados.push(nuevoReporte);
+    } else {
+      verificados[editando] = nuevoReporte;
+      editando = -1;
+    }
+
+    localStorage.setItem("verificados", JSON.stringify(verificados));
+    mostrarVerificados();
+
+    document.getElementById("descripcionVerificado").value = "";
+    document.getElementById("verificadoPor").value = "";
+  };
+
+  window.editarVerificado = function (index) {
+    const item = verificados[index];
+    document.getElementById("descripcionVerificado").value = item.descripcion;
+    document.getElementById("verificadoPor").value = item.verificadoPor;
+    editando = index;
+  };
+
+  window.eliminarVerificado = function (index) {
+    if (confirm("¿Estás seguro de eliminar este reporte?")) {
+      verificados.splice(index, 1);
+      localStorage.setItem("verificados", JSON.stringify(verificados));
+      mostrarVerificados();
+    }
+  };
+
+  mostrarVerificados();
+</script>
