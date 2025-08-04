@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FormularioVerificados from "../components/reportes-verificados/Formulario-verificados.astro";
+import ListaVerificados from "../components/reportes-verificados/Lista-verificados.astro";
+---
+<script>
+    if (localStorage.getItem("logueado") !== "true") {
+    window.location.href = "/login";
+    }
+</script>
+<Layout title="Reportes Verificados" description="Visualiza y administra los reportes ya verificados.">
+    <div class="min-h-screen bg-cover bg-center p-6 bg-fixed " 
+    style="background-image: url('/public/background-crud.jpg'); ">
+
+        
+        <h1 class="text-2xl font-bold mb-4">Reportes Verificados</h1>
+        <FormularioVerificados />
+        <hr class="my-6" />
+        <h2 class="text-xl font-semibold mb-4">Lista de reportes verificados</h2>
+        <ListaVerificados />
+        <button onclick="localStorage.removeItem('logueado'); location.href='/login'" class="bg-red-600 hover:bg-red-900 text-white px-4 py-2 mt-10 rounded">
+    Cerrar sesión
+</button>
+
+    </div>
+</Layout>

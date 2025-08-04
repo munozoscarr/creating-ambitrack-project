@@ -1,73 +1,111 @@
 ---
+// FormularioReporte.astro
 ---
+<!-- Formulario para ingresar un reporte ambiental -->
+<form id="form-reporte" class="space-y-4  p-4 rounded shadow  backdrop-blur-2xl">
+  <!-- Campo: Tipo de incidente -->
+  <div>
+    <label for="tipo" class="block mb-1">Tipo de incidente:</label>
+    <select id="tipo" class="bg-white dark:bg-gray-800 text-black dark:text-white border border-gray-300 dark:border-gray-600 p-2 w-full rounded" required>
+      <option value="">Selecciona el tipo</option>
+      <option value="Tala de árboles">Tala de árboles</option>
+      <option value="Incendio">Incendio</option>
+      <option value="Contaminación del agua">Contaminación del agua</option>
+      <option value="Vertido de residuos">Vertido de residuos</option>
+      <option value="Quema de basura">Quema de basura</option>
+    </select>
+  </div>
 
-<div class="bg-white dark:bg-gray-900 p-4 rounded shadow mb-4">
-  <form id="formulario-reporte">
-    <label class="block mb-2">
-      <h2 class="text-black dark:text-white">Tipo de incidente:</h2>
-      <input type="text" id="tipo" class="bg-white dark:bg-gray-800 text-black dark:text-white border border-gray-300 dark:border-gray-600 p-2 w-full rounded" required />
-    </label>
-    <label class="block mb-2">
-      <h2 class="text-black dark:text-white">Zona:</h2>
-      <input type="text" id="zona" class="bg-white dark:bg-gray-800 text-black dark:text-white border border-gray-300 dark:border-gray-600 p-2 w-full rounded" required />
-    </label>
-    <label class="block mb-2">
-      <h2 class="text-black dark:text-white">Descripción:</h2>
-      <textarea id="descripcion" class="bg-white dark:bg-gray-800 text-black dark:text-white border border-gray-300 dark:border-gray-600 p-2 w-full rounded" required></textarea>
-    </label>
-    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-      Guardar reporte
-    </button>
-  </form>
-</div>
+  <!-- Campo: Zona rural -->
+  <div>
+    <label for="zona" class="block mb-1">Zona rural:</label>
+    <input type="text" id="zona" class="w-full border border-gray-300 p-2 rounded dark:bg-gray-800 dark:text-white" required>
+  </div>
 
+  <!-- Campo: Descripción -->
+  <div>
+    <label for="descripcion" class="block mb-1">Descripción del incidente:</label>
+    <textarea id="descripcion" class="w-full border border-gray-300 p-2 rounded dark:bg-gray-800 dark:text-white" required></textarea>
+  </div>
 
+  <!-- Campo: Nombre del reportante (opcional) -->
+  <div class="mb-4">
+    <label for="nombre" class="block font-medium mb-1 dark:text-white">Nombre del reportante (opcional):</label>
+    <input type="text" id="nombre" name="nombre" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" placeholder="Dejar en blanco para reportar como Anónimo">
+  </div>
+
+  <!-- Botón de enviar -->
+  <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+    Enviar reporte
+  </button>
+</form>
+
+<!-- Script de funcionalidad en JavaScript moderno -->
 <script type="module">
-  let reportes = JSON.parse(localStorage.getItem('reportes') || '[]');
-  let editIndex = null;
+  // Referencias a los elementos del formulario
+  const form = document.getElementById("form-reporte");
+  const tipo = document.getElementById("tipo");
+  const zona = document.getElementById("zona");
+  const descripcion = document.getElementById("descripcion");
 
-  const form = document.getElementById('formulario-reporte');
-  const tipo = document.getElementById('tipo');
-  const zona = document.getElementById('zona');
-  const descripcion = document.getElementById('descripcion');
+  // Variables para controlar si estamos editando un reporte existente
+  let modoEdicion = false; // Si es true, estamos editando
+  let indiceEditar = null; // Índice del reporte que se está editando
 
-  function guardarEnLocalStorage() {
-    localStorage.setItem('reportes', JSON.stringify(reportes));
-    window.dispatchEvent(new Event('storage')); // Para actualizar ListaReportes
+  // Función para guardar un nuevo reporte en localStorage
+  function guardarReporte(nuevoReporte) {
+    const reportes = JSON.parse(localStorage.getItem("reportes") || "[]"); // Trae los reportes existentes o un array vacío
+    reportes.push(nuevoReporte); // Añade el nuevo
+    localStorage.setItem("reportes", JSON.stringify(reportes)); // Guarda de nuevo
   }
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  // Función para actualizar un reporte existente
+  function actualizarReporte(index, reporteActualizado) {
+    const reportes = JSON.parse(localStorage.getItem("reportes") || "[]");
+    reportes[index] = reporteActualizado;
+    localStorage.setItem("reportes", JSON.stringify(reportes));
+  }
 
+  // Manejador del evento "submit" del formulario
+  form.addEventListener("submit", (e) => {
+    e.preventDefault(); // Evita que se recargue la página
+
+    // Crea un objeto con los datos del formulario
     const nuevoReporte = {
       tipo: tipo.value.trim(),
       zona: zona.value.trim(),
       descripcion: descripcion.value.trim(),
-      estado: "En revisión"
+      estado: "En revisión", // Estado inicial por defecto
+      fecha: new Date().toLocaleString(), // Fecha automática en formato legible
     };
 
-    if (editIndex !== null) {
-      reportes[editIndex] = nuevoReporte;
-      editIndex = null;
+    // Si estamos editando, actualizamos el reporte existente
+    if (modoEdicion) {
+      actualizarReporte(indiceEditar, nuevoReporte);
+      modoEdicion = false;
+      indiceEditar = null;
     } else {
-      reportes.push(nuevoReporte);
+      // Si no estamos editando, simplemente guardamos uno nuevo
+      guardarReporte(nuevoReporte);
     }
 
-    guardarEnLocalStorage();
-
-    // Limpiar campos
-    tipo.value = "";
-    zona.value = "";
-    descripcion.value = "";
+    form.reset(); // Limpia el formulario después de guardar
+    window.dispatchEvent(new Event("storage")); // Dispara un evento para que otros componentes se actualicen
   });
 
-  // Escuchar evento personalizado para editar desde ListaReportes
-  window.addEventListener('editar-reporte', (e) => {
-    const index = e.detail;
-    const r = reportes[index];
+  // Manejador para cuando se dispara el evento "editar-reporte"
+  window.addEventListener("editar-reporte", (e) => {
+    const index = e.detail; // Índice del reporte a editar
+    const reportes = JSON.parse(localStorage.getItem("reportes") || "[]");
+    const r = reportes[index]; // Obtiene el reporte correspondiente
+
+    // Llena el formulario con los datos del reporte
     tipo.value = r.tipo;
     zona.value = r.zona;
     descripcion.value = r.descripcion;
-    editIndex = index;
+
+    // Cambia el modo a edición y guarda el índice
+    modoEdicion = true;
+    indiceEditar = index;
   });
 </script>
