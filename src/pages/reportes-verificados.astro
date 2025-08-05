@@ -3,7 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import FormularioVerificados from "../components/reportes-verificados/Formulario-verificados.astro";
 import ListaVerificados from "../components/reportes-verificados/Lista-verificados.astro";
 ---
-
 <script>
     if (localStorage.getItem("logueado") !== "true") {
         window.location.href = "/login";
