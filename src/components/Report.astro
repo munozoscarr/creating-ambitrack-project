@@ -39,11 +39,11 @@
     </div>
 </section>
 <style>
-    #btnUbicacion {
+    #btnUbicacion{
         transition: all 200ms;
     }
 
-    .animation-opacity {
+    .animation-opacity > svg {
         animation-name: animationopacity;
         animation-duration: 1s;
         opacity: 0.333;
@@ -78,10 +78,13 @@
 
         81% {
             transform: rotate(-15deg);
+
         }
 
         100% {
             transform: translateY(0);
+            fill: #02ae47;
+        
         }
     }
 

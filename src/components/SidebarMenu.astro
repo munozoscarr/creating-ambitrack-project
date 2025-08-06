@@ -2,16 +2,19 @@
 <nav class="h-full overflow-y-auto">
   <ol class="flex flex-col gap-6 p-5" >
     <li>
-      <a href="/" class=" inline-flex text-lg font-semibold hover:text-green-500">Inicio</a>
+      <a href="/" class=" inline-flex font-semibold hover:text-green-500 text-xl text-white/80 linea">Inicio</a>
     </li>
     <li>
-      <a href="/reciente" class="inline-flex text-lg font-semibold hover:text-green-500">Reciente</a>
+      <a href="/reciente" class="inline-flex font-semibold hover:text-green-500 text-xl text-white/80 linea">Reciente</a>
     </li>
     <li>
-      <a href="/reportes" class="inline-flex text-lg font-semibold hover:text-green-500">Reportes</a>
+      <a href="/reportes" class="inline-flex font-semibold hover:text-green-500 text-xl text-white/80 linea">Reportes</a>
     </li>
     <li>
-      <a href="/about" class="inline-flex text-lg font-semibold hover:text-green-500">Sobre Nosotros</a>
+      <a href="/about" class="inline-flex font-semibold hover:text-green-500 text-xl text-white/80 linea">Sobre Nosotros</a>
+    </li>
+    <li>
+      <a href="/about" class="inline-flex font-semibold hover:text-green-500 text-xl text-white/80 linea">Calificar</a>
     </li>
   </ol>
 
@@ -24,3 +27,26 @@
     </li>
   </ol> -->
 </nav>
+<style>
+  .linea {
+    position: relative;
+  }
+
+  .linea::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    bottom: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #02ae47;
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+
+  .linea:hover::after {
+    width: 100%;
+    left: 0;
+  }
+</style>
