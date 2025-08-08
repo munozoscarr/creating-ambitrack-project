@@ -1,5 +1,4 @@
 ---
-import '@fontsource-variable/jost';
 import "../styles/global.css";
 import "leaflet/dist/leaflet.css";
 import SidebarMenu from "../components/SidebarMenu.astro";
@@ -19,10 +18,10 @@ const { title, description } = Astro.props;
 	<body>
 		<!-- <Login /> -->
 		<header
-			class="w-full h-header-container fixed top-0 left-0 right-0 z-40 bg-background-light dark:bg-background-dark border-b-[1px] border-black/5 dark:border-white/10"
+			class="w-full h-header-container fixed top-0 left-0 right-0 z-40 bg-background-light dark:bg-background-dark border-b-[1px] border-black/10 dark:border-white/10"
 		>
 			<div class="px-5 h-full flex items-center justify-between">
-				<div class="flex gap-5 items-center"	>
+				<div class="flex gap-5 items-center">
 					<button
 						id="aside--open"
 						class="cursor-pointer lg:hidden"
@@ -39,16 +38,19 @@ const { title, description } = Astro.props;
 							></path></svg
 						>
 					</button>
-					<a href="/" class="text-2xl font-bold" aria-label="ambitrack"
-					>Ambi<span class="text-green-500">Track</span></a
+					<a
+						href="/"
+						class="text-2xl font-bold"
+						aria-label="ambitrack"
+						>Ambi<span class="text-green-500">Track</span></a
 					>
 				</div>
 				<a href="">
 					<img
-					width="30"
+						width="30"
 						height="30"
 						src="/Ambicon.svg"
-						class=" mr-3px rotate-90"
+						class="mr-3px rotate-90"
 						alt=""
 					/>
 				</a>
@@ -56,9 +58,9 @@ const { title, description } = Astro.props;
 		</header>
 		<div class="flex w-full relative">
 			<div
-				class="pt-[60px] w-aside-container border-r-[1px] border-black/5 dark:border-white/10 h-screen sticky top-0 left-0 bottom-0 max-lg:hidden"
+				class="pt-[60px] w-aside-container border-r-[1px] border-black/10 dark:border-white/10 h-screen sticky top-0 left-0 bottom-0 max-lg:hidden"
 			>
-			<SidebarMenu />
+				<SidebarMenu />
 			</div>
 			<div class="flex-1 pt-[60px]">
 				<main class="px-5">
@@ -143,7 +145,24 @@ const { title, description } = Astro.props;
 			id="aside-container-mb"
 			class="w-aside-container fixed left-0 bottom-0 top-0 h-screen bg-background-light z-50 dark:bg-background-dark lg:hidden -translate-x-full"
 		>
-		<SidebarMenu />
+			<div class="h-header-container pl-5 flex items-center gap-5">
+				<button id="aside--close" class="cursor-pointer">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="24px"
+						viewBox="0 -960 960 960"
+						width="24px"
+						fill="#e3e3e3"
+						><path
+							d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+						></path></svg
+					>
+				</button>
+				<a href="/" class="text-2xl font-bold" aria-label="ambitrack"
+					>Ambi<span class="text-green-500">Track</span></a
+				>
+			</div>
+			<SidebarMenu />
 		</div>
 	</body>
 </html>
@@ -168,13 +187,16 @@ const { title, description } = Astro.props;
 		width: 100%;
 		background-color: var(--background-color-light);
 		color: var(--color-light);
-		font-family: 'Jost Variable', sans-serif;
+		font-family: "Jost Variable", sans-serif;
 	}
 
 	#aside-container-mb {
 		transition: all 200ms;
 	}
 
+	.active{
+		color: #00c951;
+	}
 	@media (prefers-color-scheme: dark) {
 		body {
 			background-color: var(--background-color-dark);
@@ -183,18 +205,35 @@ const { title, description } = Astro.props;
 	}
 </style>
 <script>
+	const links: NodeListOf<HTMLAnchorElement> =
+		document.querySelectorAll(".actual");
+	const currentUrl: string = window.location.href;
+
+	links.forEach((link: HTMLAnchorElement) => {
+		if (link.href === currentUrl) {
+			link.classList.add("active");
+		}
+	});
+
 	window.addEventListener("DOMContentLoaded", () => {
 		const aside_container_mb =
 			document.getElementById("aside-container-mb");
 		const aside_open = document.getElementById("aside--open");
-		const html = document.documentElement; // Selecciona la etiqueta <html>
+		const aside_close = document.getElementById("aside--close");
+		const html = document.documentElement;
 
 		if (!aside_container_mb || !aside_open) return;
 
 		aside_open.addEventListener("click", (e) => {
 			e.stopPropagation();
 			aside_container_mb.classList.add("translate-x-0");
-			html.classList.add("pr-[15px]", "overflow-y-hidden"); // Añade padding a <html>
+			html.classList.add("pr-[9px]", "overflow-y-hidden"); // Añade padding a <html>
+		});
+
+		aside_close?.addEventListener("click", (e) => {
+			e.stopPropagation();
+			aside_container_mb.classList.remove("translate-x-0");
+			html.classList.remove("pr-[9px]", "overflow-y-hidden"); // Quita padding de <html>
 		});
 
 		document.addEventListener("click", (event) => {
@@ -206,7 +245,7 @@ const { title, description } = Astro.props;
 				!aside_open.contains(target)
 			) {
 				aside_container_mb.classList.remove("translate-x-0");
-				html.classList.remove("pr-[15px]", "overflow-y-hidden"); // Quita padding de <html>
+				html.classList.remove("pr-[9px]", "overflow-y-hidden"); // Quita padding de <html>
 			}
 		});
 	});

@@ -9,17 +9,3 @@
 	--height-header-container: 60px;
 	--width-aside-container: 18rem;
 }
-
-@font-face {
-	font-family: boldmidudev;
-	src: url('/public/fonts/onest-latin-wght-normal.ycwkluYs.woff2');
-	font-weight: 700;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: regularmidudev;
-	src: url('/public/fonts/onest-latin-wght-normal.1a2b3c4d.woff2');
-	font-weight: 400;
-	font-style: normal;
-}

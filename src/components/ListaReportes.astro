@@ -1,30 +1,24 @@
 ---
 // ListaReportes.astro
 ---
-
 <div class="backdrop-blur-3xl p-4 rounded shadow">
   <!-- Lista donde se insertarán dinámicamente los reportes -->
   <ul id="lista-reportes" class="space-y-4"></ul>
 </div>
-
 <script type="module">
   // Obtenemos la lista <ul> del DOM donde se mostrarán los reportes
   const lista = document.getElementById('lista-reportes');
-
-  // Función que renderiza todos los reportes desde localStorage
+  // nción que renderiza todos los reportes desde localStorage
   function render() {
     // Cargamos los reportes almacenados o un arreglo vacío si no hay nada guardado
     const reportes = JSON.parse(localStorage.getItem('reportes') || '[]');
-    
     // Limpiamos la lista antes de volver a renderizar
     lista.innerHTML = "";
-
     // Recorremos cada reporte y lo convertimos en un elemento <li>
     reportes.forEach((reporte, index) => {
       const item = document.createElement("li");
       // Aplicamos estilos de borde y espaciado
       item.className = "border border-gray-300 dark:border-gray-600 p-1 rounded";
-
       // Usamos innerHTML para crear el contenido visual del reporte
       item.innerHTML = `
         <div class=" p-4 rounded shadow mb-4 backdrop-blur-3xl">
@@ -45,18 +39,14 @@
           </div>
         </div>
       `;
-
       // Agregamos el elemento <li> a la lista <ul>
       lista.appendChild(item);
     });
   }
-
   // Actualiza la lista si cambia el localStorage (por ejemplo, desde otro tab)
   window.addEventListener('storage', render);
-
   // Llama a render al cargar la página
   window.addEventListener('DOMContentLoaded', render);
-
   // Escucha clics dentro de la lista para saber si se quiere editar o eliminar un reporte
   lista.addEventListener('click', (e) => {
     // Si se hizo clic en un botón de editar
@@ -65,7 +55,6 @@
       // Dispara un evento personalizado que puede ser escuchado por otro componente
       window.dispatchEvent(new CustomEvent('editar-reporte', { detail: index }));
     }
-
     // Si se hizo clic en un botón de eliminar
     if (e.target.dataset.eliminar !== undefined) {
       const index = parseInt(e.target.dataset.eliminar);
