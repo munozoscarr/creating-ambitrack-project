@@ -2,10 +2,48 @@
 
 
 @theme {
-    --color-background-dark: #121212;
+	--color-background-dark: #121212;
 	--color-dark: #ffffff;
 	--color-background-light: #ffffff;
 	--color-light: #000000;
 	--height-header-container: 60px;
 	--width-aside-container: 18rem;
+}
+
+:root {
+	--background-color-dark: #121212;
+	--color-dark: #ffffff;
+	--background-color-light: #ffffff;
+	--color-light: #000000;
+	--height-header-container: 60px;
+	--width-aside-container: 18rem;
+	--calc-aside: calc(100vh - 60px);
+	--calc-section: calc(100vh - 60px);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	width: 100%;
+	background-color: var(--background-color-light);
+	color: var(--color-light);
+	font-family: "Jost Variable", sans-serif;
+}
+
+#aside-container-mb {
+	transition: all 200ms;
+}
+
+.active {
+	color: #00c951;
+}
+
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: var(--background-color-dark);
+		color: var(--color-dark);
+	}
 }

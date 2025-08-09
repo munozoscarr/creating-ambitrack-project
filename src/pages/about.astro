@@ -3,6 +3,11 @@ import Report from "../components/Report.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 <Layout title="Ambientales / Sobre Nosotros"  description="Reporta incidentes ambientales para revisión interna." >
-    <h1>Sobre Nosotros</h1>
-    <p>Tratamos de reunir datos y que estos ayuden a los demas</p>
+    <section class="flex flex-col items-center w-full max-w-[700px] justify-center gap-10 m-auto h-(--calc-section)">
+        <h1 class="text-4xl font-bold">Sobre <span class="text-green-500" >Nosotros</span></h1>
+        <div class="flex flex-col gap-3" >
+            <p>Es una empresa de tecnología ambiental dedicada a la recolección y análisis de datos sobre el medio ambiente.</p>
+            <p>este proyecto esta echo por estudiantes del <a href="" target="_blank" class="text-green-500" >SENA</a> que sera presentado a todas las fichas del <a href="" target="_blank" class="text-green-500" >SENA</a></p>
+        </div>
+    </section>
 </Layout>
