@@ -1,13 +1,55 @@
 ---
-import Report from "../components/Report.astro";
 import Layout from "../layouts/Layout.astro";
 ---
-<Layout title="Ambientales - Sobre Nosotros"  description="Reporta incidentes ambientales para revisión interna." >
-    <section class="flex flex-col items-center w-full max-w-[700px] justify-center gap-10 m-auto h-(--calc-section)">
-        <h1 class="text-4xl font-bold">Sobre <span class="text-green-500" >Nosotros</span></h1>
-        <div class="flex flex-col gap-3" >
-            <p>Es una empresa de tecnología ambiental dedicada a la recolección y análisis de datos sobre el medio ambiente.</p>
-            <p>este proyecto esta echo por estudiantes del <a href="" target="_blank" class="text-green-500" >SENA</a> que sera presentado a todas las fichas del <a href="" target="_blank" class="text-green-500" >SENA</a></p>
-        </div>
-    </section>
+
+<Layout
+    title="Ambientales - Sobre Nosotros"
+    description="Reporta incidentes ambientales para revisión interna."
+>
+    <h1 class="text-4xl font-bold pt-8 text-center">
+        Sobre <span class="text-green-500">Nosotros</span>
+    </h1>
+
+    <h2 class="font-bold text-xl my-5">
+        Resumen <span class="text-green-500">Ejecutivo</span>
+    </h2>
+
+    <p class=" " >
+        Somos AmbiTrack, una plataforma web diseñada para ser una herramienta clave en
+        la protección y monitoreo del Parque Nacional Natural Chiribiquete, uno de los
+        ecosistemas más valiosos y amenazados del mundo. A través de una interfaz sencilla
+        y accesible, conectamos a visitantes, guardaparques, investigadores y comunidades
+        locales para que sus observaciones y conocimientos se transformen en datos útiles
+        y acciones concretas. 
+    </p>
+
+    <h4 class="font-bold text-[1rem] my-5">
+        ¿Qué <span class="text-green-500">hacemos?</span>
+    </h4>
+    <p>
+        AmbiTrack permite que cualquier persona con
+        un dispositivo móvil, incluso con conectividad limitada, pueda generar y centralizar
+        reportes ambientales en tiempo real. Esto incluye desde el avistamiento de fauna
+        y flora hasta la detección de amenazas como deforestación o incendios. La plataforma
+        procesa esta información y la presenta de manera clara en un mapa interactivo,
+        alimentando un sistema de alertas inteligentes que notifica a las autoridades
+        ambientales de manera automática ante situaciones críticas. Además, facilitamos
+        la gestión documental, organizando la información de manera eficiente y permitiendo
+        la generación de informes detallados.
+    </p>
+    <h4 class="font-bold text-[1rem] my-5">
+        ¿Por que <span class="text-green-500">lo hacemos?</span>
+    </h4>
+    <p>
+        Chiribiquete enfrenta
+        desafíos crecientes, pero las herramientas de monitoreo actuales son insuficientes.
+        La información generada por quienes están en el terreno a menudo se pierde o
+        queda dispersa, limitando la capacidad de respuesta de las autoridades. Nuestro
+        propósito es llenar este vacío al proporcionar una solución tecnológica que empodera
+        a la comunidad como un agente activo en la conservación. Creemos firmemente que,
+        al transformar las observaciones de los usuarios en datos valiosos, podemos mejorar
+        significativamente la vigilancia, promover la participación ciudadana y fortalecer
+        la toma de decisiones para proteger este patrimonio natural y cultural para las
+        futuras generaciones.
+    </p>
 </Layout>

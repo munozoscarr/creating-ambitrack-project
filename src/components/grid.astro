@@ -1,47 +1,84 @@
-<section class=" py-10 flex flex-col items-center gap-9">
-    <h1 class="text-4xl font-bold" >Que Puedes Reportar </h1>
+<section class="py-10 flex flex-col items-center gap-9">
+    <h1 class="text-4xl font-bold">Que Puedes <span class="text-red-500" >Reportar</span></h1>
     <div id="grid" class="w-full grid">
-        <div class="bg-[url(/pexels-photo-2532064.jpeg)] bg-cover  img rounded-2xl relative" >
-            <div class=" black absolute inset-0"></div>
-            <h3 class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-3xl w-full text-center text-white" >Tala de Arboles</h3>
+        <div
+            class="bg-[url(/realistichorizontal.png)] bg-cover img rounded-2xl relative"
+        >
+            <div class="black absolute inset-0"></div>
+            <h3
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-3xl w-full text-center text-white"
+            >
+                Tala de Arboles
+            </h3>
         </div>
-        <div class="bg-[url(/istockphoto-474188371-1024x1024.jpg)] bg-cover img rounded-2xl relative" >
-            <div class=" black absolute inset-0"></div>
-            <h3 class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-3xl w-full text-center text-white" >Derrumbe</h3>
+        <div
+            class="bg-[url(/realistichorizontalos.png)] bg-cover img rounded-2xl relative"
+        >
+            <div class="black absolute inset-0"></div>
+            <h3
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-3xl w-full text-center text-white"
+            >
+                Derrumbe
+            </h3>
         </div>
-        <div class="bg-[url(/incendio.webp)] bg-cover img rounded-2xl relative" >
-            <div class=" black absolute inset-0"></div>
-            <h3 class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-3xl w-full text-center text-white " >Incendio</h3>
+        <div
+            class="bg-[url(/realisticvertical.png)] bg-cover img rounded-2xl relative"
+        >
+            <div class="black absolute inset-0"></div>
+            <h3
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-3xl w-full text-center text-white"
+            >
+                Erupción
+            </h3>
         </div>
     </div>
 </section>
 <style>
-
-    #grid{
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    #grid {
+        grid-template-columns: 1fr;
         grid-auto-rows: 400px;
         gap: 20px;
     }
+    @media (width > 800px) {
+        #grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-rows: repeat(2, 300px);
+            gap: 20px;
+        }
 
-    .black{
+        #grid div:nth-child(3) {
+            grid-row: span 2;
+        }
+        #grid div:nth-child(1) {
+            grid-column: span 2;
+        }
+        #grid div:nth-child(2) {
+            grid-row: 2;
+            grid-column: span 2;
+        }
+    }
+    .black {
         border-radius: 16px;
     }
 
-    .black{
+    .black {
     }
-    
-    .img:hover .black{
+
+    .img:hover .black {
         transition: all 200s ease;
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.822) 17%, transparent);
+        background-image: linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.822) 17%,
+            transparent
+        );
     }
-    
-    .img h3{
+
+    .img h3 {
         opacity: 0;
         transition: all 300ms;
     }
 
-    .img:hover h3{
+    .img:hover h3 {
         opacity: 1;
     }
-
 </style>

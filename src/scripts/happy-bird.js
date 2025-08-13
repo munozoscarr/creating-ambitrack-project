@@ -108,7 +108,8 @@ window.onload = function () {
     birdImg = new Image();
     birdImg.src = "./img/flappybird.png";
     topTreeImg = new Image();
-    topTreeImg.src = "./img/toppipe.png";
+    topTreeImg.src = "./img/bottom.png"; 
+
     bottomTreeImg = new Image();
     bottomTreeImg.src = "./img/bottom.png";
     playButtonImg = new Image();
