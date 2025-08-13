@@ -1,9 +1,30 @@
 ---
 import Layout from "../layouts/Layout.astro";
 ---
+<script src="/src/scripts/happy-bird.js"></script>
 <Layout
     title="AmbiTrack - Flappy Bird"
     description="Reporta incidentes ambientales para revisión interna."
->
-    <h1>Calificanos</h1>
+>  
+
+
+    <div  id="container"  class="w-full h-(--calc-section) " >
+        <canvas id="board"></canvas>
+
+    </div>
 </Layout>
+<script type="module">
+
+    window.addEventListener('DOMContentLoaded', () => {
+        // Busca el footer y lo oculta
+        const footer = document.querySelector('footer');
+        const p_hidden = document.getElementById('p-hidden');
+        const main_hidden = document.getElementById('main-hidden');
+        if (footer ||  p_hidden || main_hidden) {
+            footer.style.display = 'none';
+            p_hidden.style.display = 'none';
+            main_hidden.classList.remove("px-5");
+        }
+
+    });
+</script>
