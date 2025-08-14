@@ -1,10 +1,43 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import "../styles/calificar.css";
 ---
 <Layout
-    title="AmbiTrack - calificar"
+    title="AmbiTrack - Calificar"
     description="Reporta incidentes ambientales para revisión interna."
 >
-    <h1>Calificanos</h1>
-    <p>Nos importa tus opiniones</p>
+
+
+
+<div class="flex flex-col gap-5 my-10 items-center " >
+    <h1 class="text-2xl font-bold">Califícanos</h1>
+    <p>Nos importan tus opiniones</p>
+</div>
+<section class="flex my-28 flex-col items-center mt-12  w-full" >
+        <div class="crud-box flex flex-col items-center gap-6">
+            <input type="text" id="name" placeholder="Nombre" class="input" />
+            <select id="rol" class="input">
+                <option value="">Califica tu experiencia</option>
+                <option value="excelente">⭐⭐⭐⭐⭐ Excelente</option>
+                <option value="bueno">⭐⭐⭐⭐ Bueno</option>
+                <option value="regular">⭐⭐⭐ Regular</option>
+                <option value="malo">⭐⭐ Malo</option>
+                <option value="malisimo">⭐ Malísimo</option>
+            </select>
+            <button onclick="agregarNombre()" class="btn bg-green-500">Agregar</button>
+            <span id="msg" class="msg"></span>
+        </div>
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Calificación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="listaNombres"></tbody>
+        </table>
+    </section>
 </Layout>
+<script src="/src/scripts/calificar.js"></script>

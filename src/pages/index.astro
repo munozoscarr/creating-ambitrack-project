@@ -1,11 +1,19 @@
 ---
-import Report from '../components/Report.astro';
-import Layout from '../layouts/Layout.astro';
-import Description from '../components/Description.astro';
-import Grid from '../components/grid.astro';
+import Report from "../components/Report.astro";
+import Layout from "../layouts/Layout.astro";
+import Description from "../components/Description.astro";
+import Grid from "../components/grid.astro";
 ---
-<Layout title="AmbiTrack" description="AmbiTrack es la herramienta para reportar situaciones que amenacen el medio ambiente o representen riesgos naturales. Contribuye a proteger nuestro entorno informando de manera rápida y efectiva.">
+
+<Layout
+	title="AmbiTrack"
+	description="AmbiTrack es la herramienta para reportar situaciones que amenacen el medio ambiente o representen riesgos naturales. Contribuye a proteger nuestro entorno informando de manera rápida y efectiva."
+>
 	<Report />
 	<Description />
-	<Grid />
+	<Grid
+		text1="Tala de Arboles"
+		text2="Incendio"
+		text3="Erupción"
+	/>
 </Layout>
