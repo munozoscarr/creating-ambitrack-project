@@ -1,12 +1,13 @@
 <!-- SidebarMenu.astro -->
 <nav class="h-full overflow-y-auto">
-  <ol class="flex flex-col gap-6 p-5">
+  <ol class="flex gap-6 p-5 max-lg:flex-col ">
     <li>
       <a
         href="/"
-        class="gap-3 inline-flex font-semibold hover:text-green-500 text-xl dark:text-white/80 hover:fill-green-500 fill-[currentColor] actual"
+        class="gap-3 hover-slide inline-flex font-semibold hover:text-green-500 text-xl dark:text-white/80 hover:fill-green-500 fill-[currentColor] actual"
       >
         <svg
+        class="lg:hidden"
           xmlns="http://www.w3.org/2000/svg"
           height="24px"
           viewBox="0 -960 960 960"
@@ -20,27 +21,13 @@
     </li>
     <li>
       <a
-        href="/reciente"
-        class="inline-flex gap-3 font-semibold hover:text-green-500 text-xl dark:text-white/80 hover:fill-green-500 fill-[currentColor] actual"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24px"
-          viewBox="0 -960 960 960"
-          width="24px"
-          ><path
-            d="M300-80q-58 0-99-41t-41-99v-520q0-58 41-99t99-41h500v600q-25 0-42.5 17.5T740-220q0 25 17.5 42.5T800-160v80H300Zm-60-267q14-7 29-10t31-3h20v-440h-20q-25 0-42.5 17.5T240-740v393Zm160-13h320v-440H400v440Zm-160 13v-453 453Zm60 187h373q-6-14-9.5-28.5T660-220q0-16 3-31t10-29H300q-26 0-43 17.5T240-220q0 26 17 43t43 17Z"
-          ></path></svg
-        >
-        Reciente</a
-      >
-    </li>
-    <li>
-      <a
         href="/reportes"
-        class="inline-flex gap-3 font-semibold hover:text-green-500 text-xl dark:text-white/80 hover:fill-green-500 fill-[currentColor] actual"
+        class="inline-flex gap-3 hover-slide font-semibold hover:text-green-500 text-xl dark:text-white/80 hover:fill-green-500 fill-[currentColor] actual"
       >
         <svg
+
+        class="lg:hidden "
+
           xmlns="http://www.w3.org/2000/svg"
           height="24px"
           viewBox="0 -960 960 960"
@@ -55,9 +42,10 @@
     <li>
       <a
         href="/about"
-        class="inline-flex gap-3 font-semibold hover:text-green-500 text-xl dark:text-white/80 hover:fill-green-500 fill-[currentColor] actual"
+        class="inline-flex hover-slide gap-3 font-semibold hover:text-green-500 text-xl dark:text-white/80 hover:fill-green-500 fill-[currentColor] actual"
       >
         <svg
+          class="lg:hidden"
           xmlns="http://www.w3.org/2000/svg"
           height="24px"
           viewBox="0 -960 960 960"
@@ -72,9 +60,10 @@
     <li>
       <a
         href="/calificar"
-        class="inline-flex gap-3 font-semibold hover:text-green-500 text-xl dark:text-white/80 hover:fill-green-500 fill-[currentColor] actual"
+        class="inline-flex hover-slide gap-3 font-semibold hover:text-green-500 text-xl dark:text-white/80 hover:fill-green-500 fill-[currentColor] actual"
       >
         <svg
+          class="lg:hidden"
           xmlns="http://www.w3.org/2000/svg"
           height="24px"
           viewBox="0 -960 960 960"
@@ -89,9 +78,10 @@
     <li>
       <a
         href="/Flappy-Bird"
-        class="inline-flex gap-3 font-semibold hover:text-green-500 text-xl dark:text-white/80 hover:fill-green-500 fill-[currentColor] actual"
+        class="inline-flex gap-3 hover-slide font-semibold hover:text-green-500 text-xl dark:text-white/80 hover:fill-green-500 fill-[currentColor] actual"
       >
         <svg
+          class="lg:hidden"
           xmlns="http://www.w3.org/2000/svg"
           height="24px"
           viewBox="0 -960 960 960"
@@ -103,12 +93,13 @@
         Flappy Bird</a
       >
     </li>
-    <li>
+    <!-- <li>
       <a
         href="#"
-        class="inline-flex gap-3 font-semibold hover:text-green-500 text-xl dark:text-white/80 hover:fill-green-500 fill-[currentColor] actual"
+        class="inline-flex gap-3 hover-slide font-semibold hover:text-green-500 text-xl dark:text-white/80 hover:fill-green-500 fill-[currentColor] actual"
       >
         <svg
+          class="lg:hidden"
           xmlns="http://www.w3.org/2000/svg"
           height="24px"
           viewBox="0 -960 960 960"
@@ -119,7 +110,7 @@
         >
         play</a
       >
-    </li>
+    </li> -->
   </ol>
   <!-- <ol class="border-t flex flex-col border-border-light dark:border-white/10 p-5 gap-6">
     <li>
@@ -130,3 +121,26 @@
     </li>
   </ol> -->
 </nav>
+
+<style>
+  .hover-slide{
+    font-size: 1rem ;
+    position: relative;
+  }
+  .hover-slide::after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    bottom: 0;
+    right: 0;
+    color: #00c951;
+    transition: all 0.3s ease;
+  }
+  .hover-slide:hover::after{
+    width: 100%;
+    left: 0;
+  }
+
+</style>

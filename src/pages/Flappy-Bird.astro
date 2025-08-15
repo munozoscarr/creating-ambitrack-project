@@ -7,18 +7,8 @@ import Layout from "../layouts/Layout.astro";
     title="AmbiTrack - Flappy Bird"
     description="Reporta incidentes ambientales para revisión interna."
 >
-    <div
-        id="container"
-        class="w-full h-(--calc-section) flex flex-col items-center justify-center"
-    >
-        <div class="text-not">
-            <span class="font-bold text-[1.2rem]"
-                >Este Juego no esta <span class="text-green-500"
-                    >Disponible en este tamaño</span
-                ></span
-            >
-        </div>
-        <canvas id="board"></canvas>
+    <div id="container" style="width:100vw; height:100vh; margin:0; padding:0;">
+        <canvas id="board" style="display:block; width:100vw; height:100vh;"></canvas>
     </div>
 </Layout>
 <style>

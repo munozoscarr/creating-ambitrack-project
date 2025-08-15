@@ -1,5 +1,6 @@
 let board, context;
 
+
 let boardWidth = window.innerWidth;
 let boardHeigth = window.innerHeight;
 let backgroundImg = new Image();
@@ -196,7 +197,7 @@ function renderGame() {
     context.fillStyle = "white";
     context.font = "45px sans-serif";
     context.textAlign = "left";
-    context.fillText(score, 5, 45);
+    context.fillText(score, 5, 105); // <-- Ahora 60px más abajo
 }
 
 function renderGameOver() {

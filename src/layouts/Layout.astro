@@ -4,9 +4,7 @@ import "leaflet/dist/leaflet.css";
 import SidebarMenu from "../components/SidebarMenu.astro";
 // import Login from "../pages/login.astro";
 const { title, description } = Astro.props;
-
 ---
-
 <!doctype html>
 <html lang="es" class="lg:overflow-y-auto">
 	<head>
@@ -20,7 +18,8 @@ const { title, description } = Astro.props;
 	<body>
 		<!-- <Login /> -->
 		<header
-			class="w-full h-header-container fixed top-0 left-0 right-0 z-40 bg-background-light dark:bg-background-dark border-b border-black/10 dark:border-white/10"
+			id="header"
+			class="w-full h-header-container fixed top-0 left-0 right-0 z-40"
 		>
 			<div class="px-5 h-full flex items-center justify-between">
 				<div class="flex gap-5 items-center">
@@ -48,7 +47,10 @@ const { title, description } = Astro.props;
 						>Ambi<span class="text-green-500">Track</span></a
 					>
 				</div>
-				<a href="">
+				<div class="hidden lg:block">
+					<SidebarMenu />
+				</div>
+				<!-- <a href="">
 					<img
 						width="30"
 						height="30"
@@ -56,17 +58,12 @@ const { title, description } = Astro.props;
 						class="mr-3px rotate-90"
 						alt=""
 					/>
-				</a>
+				</a> -->
 			</div>
 		</header>
 		<div class="flex w-full relative">
-			<div
-				class="pt-[60px] w-aside-container border-r-[1px] border-black/10 dark:border-white/10 h-screen sticky top-0 left-0 bottom-0 max-lg:hidden"
-			>
-				<SidebarMenu />
-			</div>
-			<div class="flex-1 pt-[60px]">
-				<main id="main-hidden" class="px-5">
+			<div class="flex-1">
+				<main id="main-hidden" class="">
 					<slot />
 				</main>
 				<footer class="flex items-center justify-center my-6">
@@ -139,7 +136,10 @@ const { title, description } = Astro.props;
 						</a>
 					</div>
 				</footer>
-				<p id="p-hidden" class="my-3.5 text-center text-[0.8rem] text-white/60">
+				<p
+					id="p-hidden"
+					class="my-3.5 text-center text-[0.8rem] text-white/60"
+				>
 					© 2025 Ambitrack
 				</p>
 			</div>
@@ -166,15 +166,34 @@ const { title, description } = Astro.props;
 				>
 			</div>
 			<SidebarMenu />
-
-
 		</div>
 	</body>
 </html>
+
+<style>
+	#header {
+		transition: background-color 200ms linear;
+	}
+	.blur-header {
+		background-color: rgba(18, 18, 18, 0.89);
+		backdrop-filter: blur(28px);
+	}
+</style>
 <script>
+	const header = document.getElementById("header") as HTMLHeadingElement;
+	window.addEventListener("scroll", () => {
+		const $scroll = window.scrollY;
+		if ($scroll > 100) {
+			header.classList.add("blur-header");
+		} else {
+			header.classList.remove("blur-header");
+		}
+	});
+
+	const currentUrl: string = window.location.href;
+
 	const links: NodeListOf<HTMLAnchorElement> =
 		document.querySelectorAll(".actual");
-	const currentUrl: string = window.location.href;
 
 	links.forEach((link: HTMLAnchorElement) => {
 		if (link.href === currentUrl) {

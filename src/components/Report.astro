@@ -1,6 +1,10 @@
 <section
-    class="h-(--calc-section) w-full flex justify-center items-center flex-col"
+    class="h-(--calc-section) w-full flex justify-center relative items-center flex-col mt-20"
 >
+<div class="fixed h-screen top-0 w-full -z-1">
+    <div class="bg-[rgba(0,0,0,0.67)] w-full h-full z-10 absolute inset-0"></div>
+    <img src="/pexels-didsss-7867345.jpg " class="inset-0 w-full h-full object-cover blur-[6px]" alt="">
+</div>
     <div class="flex items-center pt-6 justify-center w-full relative">
         <div
             class="animation-opacity absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
@@ -110,6 +114,8 @@
             (pos: GeolocationPosition) => {
                 const lat = pos.coords.latitude;
                 const lon = pos.coords.longitude;
+
+                console.log("Ubicación obtenida:", lat, lon);
                 // Si el mapa ya existe, lo actualizamos
                 if (mapa) {
                     mapa.setView([lat, lon], 13);

@@ -1,12 +1,10 @@
 ---
-
 const {Img1, text1, Img2, text2, Img3, text3 } = Astro.props
 ---
 
-<section class="py-10 lex flex-col items-center gap-9">
-    <h1 class="text-4xl text-center my-14 font-bold">Que Puedes <span class="text-red-500" >Reportar</span></h1>
+<section class="py-10 lex flex-col px-5 items-center gap-9">
+    <h1 class="text-4xl text-center my-14 font-bold">Que Puedes <span class="text-green-500" >Reportar</span></h1>
     <div id="grid" class="w-full grid">
-
         <div
             class={`bg-[url(/realistichorizontal.png)] bg-cover img rounded-2xl relative`}
         >
@@ -17,7 +15,6 @@ const {Img1, text1, Img2, text2, Img3, text3 } = Astro.props
                 {text1}
             </h3>
         </div>
-
         <div
             class={`bg-[url(/realistichorizontalos.png)] bg-cover img rounded-2xl relative`}
         >
@@ -28,7 +25,6 @@ const {Img1, text1, Img2, text2, Img3, text3 } = Astro.props
                 {text2} 
             </h3>
         </div>
-
         <div
             class={`bg-[url(/realisticvertical.png)] bg-cover img rounded-2xl relative`}
         >
@@ -39,7 +35,6 @@ const {Img1, text1, Img2, text2, Img3, text3 } = Astro.props
                 {text3}
             </h3>
         </div>
-
     </div>
 </section>
 <style>

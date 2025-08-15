@@ -1,5 +1,6 @@
 ---
 // reportes.astro
+import Report from "../components/Report.astro";
 import Layout from "../layouts/Layout.astro";
 import FormularioReporte from "../components/FormularioReporte.astro";
 import ListaReportes from "../components/ListaReportes.astro";
@@ -9,6 +10,8 @@ import ListaReportes from "../components/ListaReportes.astro";
   title="AmbiTrack - Reportes"
   description="Reporta incidentes ambientales para revisión interna."
 >
+<Report />
+
   <section class="flex flex-col items-center gap-7 pt-7">
     <h1 class="text-2xl font-bold mb-4 text-center">
       📢 Reporta un incidente ambiental

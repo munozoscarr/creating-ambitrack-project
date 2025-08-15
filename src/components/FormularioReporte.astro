@@ -1,15 +1,15 @@
 <div class="bg-transparent p-4 rounded w-full shadow max-w-[500px] mb-4">
-  <form id="formulario-reporte" class="flex flex-col w-full" >
-    <label class="block mb-2">
-      <h2 class="text-black dark:text-white font-boldmidudev">Tipo de incidente:</h2>
+  <form id="formulario-reporte" class="flex gap-8 flex-col w-full">
+    <label class="flex flex-col gap-4 mb-2">
+      <h2 class="text-black dark:text-white font-boldmidudev text-center">Tipo de incidente:</h2>
       <input type="text" id="tipo" class="bg-white dark:bg-gray-800 text-black dark:text-white border border-gray-300 dark:border-gray-600 p-2 w-full rounded" required />
     </label>
-    <label class="block mb-2">
-      <h2 class="text-black dark:text-white font-boldmidudev">Zona:</h2>
+    <label class="flex flex-col gap-4 mb-2">
+      <h2 class="text-black dark:text-white font-boldmidudev text-center">Zona:</h2>
       <input type="text" id="zona" class="bg-white dark:bg-gray-800 text-black dark:text-white border border-gray-300 dark:border-gray-600 p-2 w-full rounded" required />
     </label>
-    <label class="block mb-2">
-      <h2 class="text-black dark:text-white font-boldmidudev">Descripción:</h2>
+    <label class="flex flex-col gap-4 mb-2">
+      <h2 class="text-black dark:text-white font-boldmidudev text-center">Descripción:</h2>
       <textarea id="descripcion" class="bg-white dark:bg-gray-800 text-black dark:text-white border border-gray-300 dark:border-gray-600 p-2 w-full rounded" required></textarea>
     </label>
     <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
@@ -18,48 +18,51 @@
   </form>
 </div>
 <script type="module">
-  let reportes = JSON.parse(localStorage.getItem('reportes') || '[]');
-  let editIndex = null;
-  const form = document.getElementById('formulario-reporte');
-  const tipo = document.getElementById('tipo');
-  const zona = document.getElementById('zona');
-  const descripcion = document.getElementById('descripcion');
-  function guardarReporte(reporte) {
-    reportes.push(reporte);
-  }
-  function guardarEnLocalStorage() {
-    localStorage.setItem('reportes', JSON.stringify(reportes));
-    window.dispatchEvent(new Event('storage')); // Para actualizar ListaReportes
-  }
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const nuevoReporte = {
-      tipo: tipo.value.trim(),
-      zona: zona.value.trim(),
-      descripcion: descripcion.value.trim(),
-      estado: "En revisión"
-    };
-    if (editIndex !== null) {
-      reportes[editIndex] = nuevoReporte;
-      editIndex = null;
-    } else {
-      // Si no estamos editando, simplemente guardamos uno nuevo
-      guardarReporte(nuevoReporte);
+  window.addEventListener('DOMContentLoaded', () => {
+    let reportes = JSON.parse(localStorage.getItem('reportes') || '[]');
+    let editIndex = null;
+    const form = document.getElementById('formulario-reporte');
+    const tipo = document.getElementById('tipo');
+    const zona = document.getElementById('zona');
+    const descripcion = document.getElementById('descripcion');
+
+    function guardarReporte(reporte) {
+      reportes.push(reporte);
     }
-    guardarEnLocalStorage();
-    // Limpiar campos
-    tipo.value = "";
-    zona.value = "";
-    descripcion.value = "";
-  });
-  // Escuchar evento personalizado para editar desde ListaReportes
-  window.addEventListener('editar-reporte', (e) => {
-    const index = e.detail;
-    const r = reportes[index];
-    tipo.value = r.tipo;
-    zona.value = r.zona;
-    descripcion.value = r.descripcion;
-    // Cambia el modo a edición y guarda el índice
-    editIndex = index;
+    function guardarEnLocalStorage() {
+      localStorage.setItem('reportes', JSON.stringify(reportes));
+      window.dispatchEvent(new Event('storage')); // Para actualizar ListaReportes
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nuevoReporte = {
+        tipo: tipo.value.trim(),
+        zona: zona.value.trim(),
+        descripcion: descripcion.value.trim(),
+        estado: "En revisión"
+      };
+      if (editIndex !== null) {
+        reportes[editIndex] = nuevoReporte;
+        editIndex = null;
+      } else {
+        guardarReporte(nuevoReporte);
+      }
+      guardarEnLocalStorage();
+      // Limpiar campos
+      tipo.value = "";
+      zona.value = "";
+      descripcion.value = "";
+    });
+
+    // Escuchar evento personalizado para editar desde ListaReportes
+    window.addEventListener('editar-reporte', (e) => {
+      const index = e.detail;
+      const r = reportes[index];
+      tipo.value = r.tipo;
+      zona.value = r.zona;
+      descripcion.value = r.descripcion;
+      editIndex = index;
+    });
   });
 </script>

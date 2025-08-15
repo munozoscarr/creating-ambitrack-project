@@ -6,50 +6,61 @@ import Layout from "../layouts/Layout.astro";
     title="Ambientales - Sobre Nosotros"
     description="Reporta incidentes ambientales para revisión interna."
 >
-    <h1 class="text-4xl font-bold pt-8 text-center">
-        Sobre <span class="text-green-500">Nosotros</span>
-    </h1>
+    <section
+        class="flex flex-wrap justify-center items-center h-screen gap-6 p-6"
+    >
+     <div class="w-full  h-screen flex items-center fixed  -z-10    justify-center">
+        <div class="bg-[rgba(0,0,0,0.67)] w-full h-full z-0 absolute inset-0">
+        </div>
+        <img
+            src="/pexels-samerdaboul-1246439.jpg "
+            class="object-cover w-full -z-[9] h-full blur-[6px]"
+            alt=""
+        />
+    </div>
+        <!-- Card 1 -->
+        <div
+            class="max-w-sm bg-gradient-to-br from-green-100 to-blue-100 rounded-xl shadow-md p-6 transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer"
+        >
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">
+                🌎 Resumen
+            </h3>
+            <p class="text-gray-700 leading-relaxed">
+                AmbiTrack es una plataforma web que protege el Parque Nacional
+                Natural Chiribiquete. Conectamos a visitantes, guardaparques y
+                comunidades para transformar observaciones en datos útiles y
+                acciones concretas.
+            </p>
+        </div>
 
-    <h2 class="font-bold text-xl my-5">
-        Resumen <span class="text-green-500">Ejecutivo</span>
-    </h2>
+        <!-- Card 2 -->
+        <div
+            class="max-w-sm bg-gradient-to-br from-green-100 to-blue-100 rounded-xl shadow-md p-6 transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer"
+        >
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">
+                📲 ¿Qué hacemos?
+            </h3>
+            <p class="text-gray-700 leading-relaxed">
+                Permitimos reportes ambientales en tiempo real desde cualquier
+                dispositivo móvil. Mostramos datos en mapas interactivos y
+                activamos alertas inteligentes ante amenazas como incendios o
+                deforestación.
+            </p>
+        </div>
 
-    <p class=" " >
-        Somos AmbiTrack, una plataforma web diseñada para ser una herramienta clave en
-        la protección y monitoreo del Parque Nacional Natural Chiribiquete, uno de los
-        ecosistemas más valiosos y amenazados del mundo. A través de una interfaz sencilla
-        y accesible, conectamos a visitantes, guardaparques, investigadores y comunidades
-        locales para que sus observaciones y conocimientos se transformen en datos útiles
-        y acciones concretas. 
-    </p>
-
-    <h4 class="font-bold text-[1rem] my-5">
-        ¿Qué <span class="text-green-500">hacemos?</span>
-    </h4>
-    <p>
-        AmbiTrack permite que cualquier persona con
-        un dispositivo móvil, incluso con conectividad limitada, pueda generar y centralizar
-        reportes ambientales en tiempo real. Esto incluye desde el avistamiento de fauna
-        y flora hasta la detección de amenazas como deforestación o incendios. La plataforma
-        procesa esta información y la presenta de manera clara en un mapa interactivo,
-        alimentando un sistema de alertas inteligentes que notifica a las autoridades
-        ambientales de manera automática ante situaciones críticas. Además, facilitamos
-        la gestión documental, organizando la información de manera eficiente y permitiendo
-        la generación de informes detallados.
-    </p>
-    <h4 class="font-bold text-[1rem] my-5">
-        ¿Por que <span class="text-green-500">lo hacemos?</span>
-    </h4>
-    <p>
-        Chiribiquete enfrenta
-        desafíos crecientes, pero las herramientas de monitoreo actuales son insuficientes.
-        La información generada por quienes están en el terreno a menudo se pierde o
-        queda dispersa, limitando la capacidad de respuesta de las autoridades. Nuestro
-        propósito es llenar este vacío al proporcionar una solución tecnológica que empodera
-        a la comunidad como un agente activo en la conservación. Creemos firmemente que,
-        al transformar las observaciones de los usuarios en datos valiosos, podemos mejorar
-        significativamente la vigilancia, promover la participación ciudadana y fortalecer
-        la toma de decisiones para proteger este patrimonio natural y cultural para las
-        futuras generaciones.
-    </p>
+        <!-- Card 3 -->
+        <div
+            class="max-w-sm bg-gradient-to-br from-green-100 to-blue-100 rounded-xl shadow-md p-6 transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer"
+        >
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">
+                💚 ¿Por qué lo hacemos?
+            </h3>
+            <p class="text-gray-700 leading-relaxed">
+                Chiribiquete necesita vigilancia efectiva. AmbiTrack empodera a
+                la comunidad para conservar este patrimonio natural, mejorando
+                la respuesta de autoridades y fomentando la participación
+                ciudadana.
+            </p>
+        </div>
+    </section>
 </Layout>

@@ -31,8 +31,9 @@
     background: transparent;
 }
 .msg {
-    color: #dc2626;
+    color: white;
     font-size: 0.95rem;
+    padding: 10px;
     margin-left: 0.5rem;
     align-self: center;
 }
