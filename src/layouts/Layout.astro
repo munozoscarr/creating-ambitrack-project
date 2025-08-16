@@ -170,23 +170,14 @@ const { title, description } = Astro.props;
 	</body>
 </html>
 
-<style>
-	#header {
-		transition: background-color 200ms linear;
-	}
-	.blur-header {
-		background-color: rgba(18, 18, 18, 0.89);
-		backdrop-filter: blur(28px);
-	}
-</style>
 <script>
 	const header = document.getElementById("header") as HTMLHeadingElement;
 	window.addEventListener("scroll", () => {
 		const $scroll = window.scrollY;
-		if ($scroll > 100) {
-			header.classList.add("blur-header");
+		if ($scroll > 20) {
+			header.classList.add('backdrop-blur-[20px]', 'bg-black/95');
 		} else {
-			header.classList.remove("blur-header");
+			header.classList.remove('backdrop-blur-[20px]', 'bg-black/95');
 		}
 	});
 

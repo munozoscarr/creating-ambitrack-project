@@ -15,11 +15,12 @@
 	--color-dark: #ffffff;
 	--background-color-light: #ffffff;
 	--color-light: #000000;
-	--height-header-container: 80px;
+	--height-header-container: 70px;
 	--width-aside-container: 18rem;
 	--calc-aside: calc(100vh - 60px);
 	--calc-section: calc(100vh - 60px);
 }
+
 
 
 body {

@@ -7,10 +7,17 @@ import Grid from "../components/grid.astro";
 <Layout
 	title="AmbiTrack"
 	description="AmbiTrack es la herramienta para reportar situaciones que amenacen el medio ambiente o representen riesgos naturales. Contribuye a proteger nuestro entorno informando de manera rápida y efectiva."
-
 	>
-	<!-- <video width="100" height="100" autoplay loop muted src="/videos/avesfondo.mp4" class=" object-cover" ></video> -->
+	<div class="w-full h-screen relative flex items-center justify-center" >
+		<h1 class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 text-7xl font-extrabold" >Ambi<span class="text-green-500" >Track</span></h1>
+		<div class="bg-[rgba(0,0,0,0.63)] w-full h-full z-20 absolute inset-0 blur-xl" ></div>
+		<video autoplay loop muted src="/videos/4984847-hd-1920-1080-30fps_FvjGox76.mp4" class="w-full h-screen object-cover blur-[10px]"></video>
+	</div>
 	<Description />
 	<Grid text1="Tala de Arboles"  text2="Incendio" text3="Erupción" />
+
+	<!-- onmouseover="this.play()"
+  onmouseout="this.pause(); this.currentTime = 0;" -->
+
 </Layout>
 
