@@ -7,25 +7,14 @@ import Layout from "../layouts/Layout.astro";
     description="Reporta incidentes ambientales para revisión interna."
 >
     <section
-        class="flex flex-wrap justify-center items-center h-screen gap-6 p-6"
+        class="flex flex-wrap justify-center items-center h-screen gap-9 p-6"
     >
-     <div class="w-full  h-screen flex items-center fixed  -z-10    justify-center">
-        <div class="bg-[rgba(0,0,0,0.67)] w-full h-full z-0 absolute inset-0">
-        </div>
-        <img
-            src="/pexels-samerdaboul-1246439.jpg "
-            class="object-cover w-full -z-[9] h-full blur-[6px]"
-            alt=""
-        />
-    </div>
         <!-- Card 1 -->
         <div
-            class="max-w-sm bg-gradient-to-br from-green-100 to-blue-100 rounded-xl shadow-md p-6 transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer"
+            class="max-w-sm bg-background-dark rounded-xl shadow-md p-6 transition-transform duration-300 hover:bg-background-dark"
         >
-            <h3 class="text-xl font-semibold text-gray-800 mb-4">
-                🌎 Resumen
-            </h3>
-            <p class="text-gray-700 leading-relaxed">
+            <h3 class="text-xl font-semibold mb-4">🌎 Resumen</h3>
+            <p class="leading-relaxed">
                 AmbiTrack es una plataforma web que protege el Parque Nacional
                 Natural Chiribiquete. Conectamos a visitantes, guardaparques y
                 comunidades para transformar observaciones en datos útiles y
@@ -35,12 +24,10 @@ import Layout from "../layouts/Layout.astro";
 
         <!-- Card 2 -->
         <div
-            class="max-w-sm bg-gradient-to-br from-green-100 to-blue-100 rounded-xl shadow-md p-6 transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer"
+            class="max-w-sm bg-background-dark rounded-xl shadow-md p-6 transition-transform duration-300 hover:bg-background-dark"
         >
-            <h3 class="text-xl font-semibold text-gray-800 mb-4">
-                📲 ¿Qué hacemos?
-            </h3>
-            <p class="text-gray-700 leading-relaxed">
+            <h3 class="text-xl font-semibold mb-4">📲 ¿Qué hacemos?</h3>
+            <p class="leading-relaxed">
                 Permitimos reportes ambientales en tiempo real desde cualquier
                 dispositivo móvil. Mostramos datos en mapas interactivos y
                 activamos alertas inteligentes ante amenazas como incendios o
@@ -50,12 +37,10 @@ import Layout from "../layouts/Layout.astro";
 
         <!-- Card 3 -->
         <div
-            class="max-w-sm bg-gradient-to-br from-green-100 to-blue-100 rounded-xl shadow-md p-6 transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer"
+            class="max-w-sm bg-background-dark rounded-xl shadow-md p-6 transition-transform duration-300 hover:bg-background-dark"
         >
-            <h3 class="text-xl font-semibold text-gray-800 mb-4">
-                💚 ¿Por qué lo hacemos?
-            </h3>
-            <p class="text-gray-700 leading-relaxed">
+            <h3 class="text-xl font-semibold mb-4">💚 ¿Por qué lo hacemos?</h3>
+            <p class="leading-relaxed">
                 Chiribiquete necesita vigilancia efectiva. AmbiTrack empodera a
                 la comunidad para conservar este patrimonio natural, mejorando
                 la respuesta de autoridades y fomentando la participación
@@ -64,3 +49,20 @@ import Layout from "../layouts/Layout.astro";
         </div>
     </section>
 </Layout>
+<style>
+    div {
+        position: relative;
+    }
+    div::before {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -20;
+        background-color: rgba(0, 128, 0, 0.678);
+        filter: blur(10px);
+        content: "";
+    }
+</style>

@@ -4,7 +4,7 @@ let board, context;
 let boardWidth = window.innerWidth;
 let boardHeigth = window.innerHeight;
 let backgroundImg = new Image();
-backgroundImg.src = "./img/Fondo1.png";
+backgroundImg.src = "/background-crud.jpg";
 let inputLocked = false;
 
 document.addEventListener("keydown", handleKeyDown);
@@ -107,7 +107,7 @@ window.onload = function () {
     window.addEventListener("resize", resizeCanvas);
 
     birdImg = new Image();
-    birdImg.src = "./img/flappybird.png";
+    birdImg.src = "./img/unpericoconfondo.png";
     topTreeImg = new Image();
     topTreeImg.src = "./img/bottom.png"; 
 
