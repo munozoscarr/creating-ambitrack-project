@@ -49,15 +49,6 @@ const { title, description } = Astro.props;
 				<div class="hidden lg:block">
 					<SidebarMenu />
 				</div>
-				<!-- <a href="">
-					<img
-						width="30"
-						height="30"
-						src="/Ambicon.svg"
-						class="mr-3px rotate-90"
-						alt=""
-					/>
-				</a> -->
 			</div>
 		</header>
 		<div class="flex w-full relative">
@@ -65,7 +56,7 @@ const { title, description } = Astro.props;
 				<main id="main-hidden" class="">
 					<slot />
 				</main>
-				<footer class="flex items-center justify-center my-6">
+				<footer class="flex items-center justify-center mb-6 mt-28">
 					<div class="flex items-center gap-6">
 						<a
 							href=""
@@ -225,3 +216,9 @@ const { title, description } = Astro.props;
 		});
 	});
 </script>
+
+<style>
+	footer a{
+		transition: all 100ms ease;
+	}
+</style>
