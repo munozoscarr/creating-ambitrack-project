@@ -1,12 +1,14 @@
 ---
-const {Img1, text1, Img2, text2, Img3, text3 } = Astro.props
+const {Img1, text1, Img2, text2, Img3, text3 } = Astro.props;
 ---
 
-<section class="py-10 lex flex-col px-5 items-center max-w-6xl m-auto gap-9">
-    <h1 class="text-4xl text-center my-14 font-bold">Que Puedes <span class="text-green-500" >Reportar</span></h1>
+<!-- Script de animación -->
+
+<section class="py-10 lex flex-col px-5 items-center max-w-6xl m-auto gap-9 overflow-hidden">
+    <h1 class="text-4xl text-center my-14 font-bold opacity-0 animate-fadeInUp">Que Puedes <span class="text-green-500">Reportar</span></h1>
     <div id="grid" class="w-full grid">
         <div
-            class={`bg-[url(/realistichorizontal.png)] bg-cover img rounded-2xl relative`}
+            class="bg-[url(/realistichorizontal.png)] bg-cover img rounded-2xl relative grid-item "
         >
             <div class="black absolute inset-0"></div>
             <h3
@@ -16,7 +18,7 @@ const {Img1, text1, Img2, text2, Img3, text3 } = Astro.props
             </h3>
         </div>
         <div
-            class={`bg-[url(/realistichorizontalos.png)] bg-cover img rounded-2xl relative`}
+            class="bg-[url(/realistichorizontalos.png)] bg-cover img rounded-2xl relative grid-item "
         >
             <div class="black absolute inset-0"></div>
             <h3
@@ -26,7 +28,7 @@ const {Img1, text1, Img2, text2, Img3, text3 } = Astro.props
             </h3>
         </div>
         <div
-            class={`bg-[url(/realisticvertical.png)] bg-cover img rounded-2xl relative`}
+            class="bg-[url(/realisticvertical.png)] bg-cover img rounded-2xl relative grid-item"
         >
             <div class="black absolute inset-0"></div>
             <h3
@@ -38,6 +40,7 @@ const {Img1, text1, Img2, text2, Img3, text3 } = Astro.props
     </div>
 </section>
 <style>
+    /* Animación de entrada */
     #grid {
         grid-template-columns: 1fr;
         grid-auto-rows: 800px;
@@ -87,3 +90,4 @@ const {Img1, text1, Img2, text2, Img3, text3 } = Astro.props
         opacity: 1;
     }
 </style>
+

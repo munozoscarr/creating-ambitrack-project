@@ -7,11 +7,11 @@ import Layout from "../layouts/Layout.astro";
     description="Reporta incidentes ambientales para revisión interna."
 >
     <section
-        class="flex flex-wrap justify-center items-center h-screen gap-9 p-6"
+        class="flex flex-wrap justify-center items-center min-h-screen gap-9 p-6 "
     >
         <!-- Card 1 -->
         <div
-            class="max-w-sm bg-background-dark rounded-xl shadow-md p-6 transition-transform duration-300 hover:bg-background-dark"
+            class="max-w-sm p-6 relative overflow-hidden group"
         >
             <h3 class="text-xl font-semibold mb-4">🌎 Resumen</h3>
             <p class="leading-relaxed">
@@ -24,7 +24,7 @@ import Layout from "../layouts/Layout.astro";
 
         <!-- Card 2 -->
         <div
-            class="max-w-sm bg-background-dark rounded-xl shadow-md p-6 transition-transform duration-300 hover:bg-background-dark"
+            class="max-w-sm p-6 relative overflow-hidden group"
         >
             <h3 class="text-xl font-semibold mb-4">📲 ¿Qué hacemos?</h3>
             <p class="leading-relaxed">
@@ -37,7 +37,7 @@ import Layout from "../layouts/Layout.astro";
 
         <!-- Card 3 -->
         <div
-            class="max-w-sm bg-background-dark rounded-xl p-6 duration-300 hover:bg-background-dark"
+            class="max-w-sm p-6 relative overflow-hidden group"
         >
             <h3 class="text-xl font-semibold mb-4">💚 ¿Por qué lo hacemos?</h3>
             <p class="leading-relaxed">
@@ -50,19 +50,16 @@ import Layout from "../layouts/Layout.astro";
     </section>
 </Layout>
 <style>
-    div {
-        position: relative;
+    /* Efecto de escala al hacer hover */
+    .group {
+        transition: transform 0.3s ease;
     }
-    div::before {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: -20;
-        background-color: rgba(0, 128, 0, 0.678);
-        filter: blur(10px);
-        content: "";
+    
+    .group:hover {
+        transform: scale(1.02);
     }
+    div{
+        background-color: #000000;
+    }
+
 </style>

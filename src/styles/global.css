@@ -52,6 +52,7 @@ body {
 	color: #00c951;
 }
 
+
 @media (prefers-color-scheme: dark) {
 	body {
 		background-color: var(--background-color-dark);

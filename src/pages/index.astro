@@ -2,19 +2,21 @@
 import Layout from "../layouts/Layout.astro";
 import Description from "../components/Description.astro";
 import Grid from "../components/grid.astro";
+import VideoText from "../components/videotext.astro";
 ---
 <Layout
 	title="AmbiTrack"
 	description="AmbiTrack es la herramienta para reportar situaciones que amenacen el medio ambiente o representen riesgos naturales. Contribuye a proteger nuestro entorno informando de manera rápida y efectiva."
 	>
-	<div class="w-full h-screen relative flex items-center justify-center" >
+	<div class="w-full h-screen  relative flex items-center justify-center" >
 		<h1 class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 text-7xl font-extrabold text-shadow-[0 0 10px rgb(255, 255, 255) ]">Ambi<span class="text-green-500" >Track</span></h1>
 		<div class="bg-[rgba(0,0,0,0.63)] w-full h-full z-20 absolute inset-0 blur-xl" ></div>
 		<video autoplay loop muted src="/videos/4542-179384324.mp4" class="w-full h-screen object-cover blur-[10px]"></video>
 	</div>
 	<Grid text1="Tala de Arboles"  text2="Incendio" text3="Erupción" />
-	<Description />
-
+	<VideoText img="277468_small">
+		<p>Debemos <a href="#" class="text-green-500">reportar</a> porque actuar rápido puede salvar vidas, proteger el medio ambiente y evitar que el fuego se propague y cause daños irreparables. Cada reporte oportuno permite a los equipos de emergencia responder con mayor eficacia, reducir el riesgo para las comunidades cercanas y preservar los ecosistemas que dependen de ese territorio. Reportar no es solo una responsabilidad: es un acto de conciencia y solidaridad.</p>
+	</VideoText>
 	<!-- onmouseover="this.play()"
   onmouseout="this.pause(); this.currentTime = 0;" -->
 

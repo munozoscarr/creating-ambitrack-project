@@ -5,7 +5,6 @@ import SidebarMenu from "../components/SidebarMenu.astro";
 // import Login from "../pages/login.astro";
 const { title, description } = Astro.props;
 ---
-
 <!doctype html>
 <html lang="es" class="lg:overflow-y-auto">
 	<head>
@@ -13,7 +12,6 @@ const { title, description } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/Ambicon.svg" />
 		<meta name="description" content={description} />
-		<meta name="author" content="Oscar, Jhosua, Juan, Catalina, Duver" />
 		<title>{title}</title>
 	</head>
 	<body>
@@ -157,51 +155,59 @@ const { title, description } = Astro.props;
 			</div>
 			<SidebarMenu />
 		</div>
+		<button title="ir a riba" class="fixed bottom-7 right-7 z-50 cursor-pointer bg-[rgba(0,0,0,0.73)]  rounded-full p-4 translate-y-96  rotate-45 backdrop-blur-3xl   hover:rotate-0 transition-all duration-300 ease-linear " id="button-top">
+			<svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#e3e3e3"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg>
+		</button>
 	</body>
 </html>
-
 <script>
-	const punto = document.querySelector(".cursor-punto") as HTMLDivElement;
+	window.addEventListener('scroll', () => {
+		const button_top = document.getElementById("button-top") as HTMLButtonElement;
+		const scroll_top = window.scrollY;
 
+		if(scroll_top > 30) {
+			button_top.classList.remove('translate-y-96');
+		}else{
+			button_top.classList.add('translate-y-96');
+		}
+	})
+	const button_top = document.getElementById("button-top") as HTMLButtonElement;
+	button_top.addEventListener('click', () => {
+		window.scrollTo({top: 0, behavior: 'smooth'})
+	})
+	const punto = document.querySelector(".cursor-punto") as HTMLDivElement;
 	document.addEventListener("mousemove", (e) => {
+		if(!punto) return; 
 		const x = e.clientX - 100; // 6 = mitad de 12px
 		const y = e.clientY - 100;
 		punto.style.transform = `translate(${x}px, ${y}px)`;
 		punto.style.display = "block";
 	});
-
 	const currentUrl: string = window.location.href;
-
 	const links: NodeListOf<HTMLAnchorElement> =
 		document.querySelectorAll(".actual");
-
 	links.forEach((link: HTMLAnchorElement) => {
 		if (link.href === currentUrl) {
 			link.classList.add("active");
 		}
 	});
-
 	window.addEventListener("DOMContentLoaded", () => {
 		const aside_container_mb =
 			document.getElementById("aside-container-mb");
 		const aside_open = document.getElementById("aside--open");
 		const aside_close = document.getElementById("aside--close");
 		const html = document.documentElement;
-
 		if (!aside_container_mb || !aside_open || !aside_close) return;
-
 		aside_open.addEventListener("click", (e) => {
 			e.stopPropagation();
 			aside_container_mb.classList.add("translate-x-0");
 			html.classList.add("pr-[9px]", "overflow-y-hidden"); // Añade padding a <html>
 		});
-
 		aside_close?.addEventListener("click", (e) => {
 			e.stopPropagation();
 			aside_container_mb.classList.remove("translate-x-0");
 			html.classList.remove("pr-[9px]", "overflow-y-hidden"); // Quita padding de <html>
 		});
-
 		document.addEventListener("click", (event) => {
 			const target = event.target;
 			if (
@@ -216,7 +222,6 @@ const { title, description } = Astro.props;
 		});
 	});
 </script>
-
 <style>
 	footer a{
 		transition: all 100ms ease;
