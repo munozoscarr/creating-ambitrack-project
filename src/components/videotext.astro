@@ -2,11 +2,39 @@
 const { img } = Astro.props;
 ---
 
-<div class="max-w-6xl h-[600px] gap-7 px-5 mx-auto flex">
-  <div>
-
-  </div>
-  <div>
-    
+<div class="max-w-6xl px-5 mx-auto my-12">
+  <div class="relative group border border-white/20 grid-item rounded-2xl">
+    <div class="relative p-[0.5px] rounded-2xl bg-gradient-to-r from-green-700/20 via-green-600/20 to-green-700/10 bg-[length:300%_100%] animate-shimmer">
+      <div class="relative flex flex-col md:flex-row items-center gap-10 p-8 bg-transparent rounded-xl">
+        <div class="relative w-full md:w-2/5">
+          <video 
+            class="w-full h-full  max-w-full rounded-xl shadow-lg transition-transform duration-300 object-cover aspect-[22/15] relative z-10" 
+            src={`/videos/${img}.mp4`} 
+            loop 
+            muted
+            onmouseover="this.play()"
+            onmouseout="this.playbackRate = 1; this.pause(); this.currentTime = 0;"
+            playsinline
+          ></video>
+        </div>
+        <div class="w-full md:w-3/5 p-4">
+          <div class="prose dark:prose-invert max-w-none text-lg leading-relaxed text-white">
+            <slot />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<style>
+  @keyframes shimmer {
+    0% { background-position: 0% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+    background-size: 200% 100%;
+  }
+</style>
