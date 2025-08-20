@@ -1,78 +1,136 @@
 @import "tailwindcss";
 @theme {
-	--color-background-dark: #000000;
-	--color-dark: #ffffff;
-	--color-background-light: #000000;
-	--color-light: #ffffff;
-	--height-header-container: 60px;
-	--width-aside-container: 18rem;
+  --color-background-dark: #000000;
+  --color-dark: #ffffff;
+  --color-background-light: #000000;
+  --color-light: #ffffff;
+  --height-header-container: 60px;
+  --width-aside-container: 18rem;
 }
 :root {
-	--background-color-dark: #000000;
-	--color-dark: #ffffff;
-	--background-color-light: #000000;
-	--color-light: #ffffff;
-	--height-header-container: 90px;
-	--width-aside-container: 18rem;
-	--calc-aside: calc(100vh - 60px);
-	--calc-section: calc(100vh - 60px);
+  --background-color-dark: #000000;
+  --color-dark: #ffffff;
+  --background-color-light: #000000;
+  --color-light: #ffffff;
+  --height-header-container: 90px;
+  --width-aside-container: 18rem;
+  --calc-aside: calc(100vh - 60px);
+  --calc-section: calc(100vh - 60px);
 }
 .cursor-punto {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 300px;
-	height: 300px;
-	background-color: rgba(255, 255, 255, 0.3);
-	border-radius: 1000px;
-	pointer-events: none;
-	z-index: -1;
-	filter: blur(100px);
-	mix-blend-mode: difference;
-	transform: translate(-50%, -50%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  background-color: rgba(100, 100, 100, 0.37);
+  border-radius: 1000px;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(100px);
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
 }
 body {
-	margin: 0;
-	width: 100%;
-	background-color: #000000;
-	color: var(--color-light);
-	font-family: "Jost Variable", sans-serif;
+  margin: 0;
+  width: 100%;
+  background-color: #000000;
+  color: var(--color-light);
+  font-family: "Jost Variable", sans-serif;
 }
 .cuadricula {
-	width: 100%;
-	height: 100vh;
-	position: fixed;
-	top: 0;
-	left: 0;
-	background-color: #000000;
-	background-image:
-		linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-		linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-	background-size: 60px 60px;
-	z-index: -1;
-	pointer-events: none;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: -1;
+  pointer-events: none;
 }
 #aside-container-mb {
-	transition: all 200ms;
+  transition: all 200ms;
 }
 .active {
-	color: #00c951;
+  color: #00c951;
 }
 .animate-fadeInUp {
-	opacity: 1 !important;
-	transform: translateY(0);
-	transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-				transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1 !important;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .opacity-0 {
-	opacity: 0;
-	transform: translateY(30px);
-	transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-				transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
-@media (prefers-color-scheme: dark) {
-	body {
-		background-color: var(--background-color-dark);
-		color: var(--color-dark);
-	}
+.svg,
+.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+}
+.svg {
+  animation-name: fadeInSVG;
+}
+
+.text {
+  animation-name: fadeInText;
+}
+@keyframes fadeInSVG {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  40% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+@keyframes fadeInText {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  50% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
 }

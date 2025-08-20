@@ -30,26 +30,19 @@ import Layout from "../layouts/Layout.astro";
     }
 </style>
 <style>
-    /* Hide grid on Flappy Bird page */
     .flappy-bird-page .cuadricula {
         display: none !important;
     }
-    
-    /* Hide other elements */
     .flappy-bird-page footer,
     .flappy-bird-page #p-hidden,
     .flappy-bird-page #main-hidden {
         display: none !important;
     }
 </style>
-
 <script is:inline>
-    // Hide grid immediately
     document.addEventListener('astro:page-load', () => {
         const grid = document.querySelector('.cuadricula');
         if (grid) grid.style.display = 'none';
-        
-        // Hide other elements
         ['footer', '#p-hidden', '#main-hidden'].forEach(selector => {
             const el = document.querySelector(selector);
             if (el) el.style.display = 'none';

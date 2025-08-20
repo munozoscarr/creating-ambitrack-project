@@ -1,14 +1,8 @@
----
-// ListaReportes.astro
----
-
 <div class="backdrop-blur-3xl p-4 rounded shadow">
-  <!-- Lista donde se insertarán dinámicamente los reportes -->
-  <ul id="lista-reportes" class="space-y-4"></ul>
+  <ul id="lista-reportes" class="space-y-4 flex grid-item flex-col gap-4"></ul>
 </div>
 <script type="module">
   const lista = document.getElementById("lista-reportes");
-
   function render() {
     const reportes = JSON.parse(localStorage.getItem("reportes") || "[]");
     lista.innerHTML = "";
@@ -17,12 +11,12 @@
       item.className =
         "border border-gray-300 dark:border-gray-600 p-1 rounded";
       item.innerHTML = ` 
-        <div class="p-4 rounded shadow mb-4 backdrop-blur-3xl grid-item animate-fadeInUp">
-          <p><strong>Tipo:</strong> ${reporte.tipo}</p>
-          <p><strong>Zona:</strong> ${reporte.zona}</p>
-          <p><strong>Descripción:</strong> ${reporte.descripcion}</p>
-          <p><strong>Estado:</strong> ${reporte.estado}</p>
-          <p><strong>Fecha:</strong> ${reporte.fecha || "Sin fecha"}</p>
+        <div class="p-4 flex flex-col gap-3 rounded shadow mb-4 backdrop-blur-3xl">
+          <p><strong>Tipo: </strong>${reporte.tipo}</p>
+          <p><strong>Zona: </strong>${reporte.zona}</p>
+          <p><strong>Descripción: </strong>${reporte.descripcion}</p>
+          <p><strong>Estado: </strong>${reporte.estado}</p>
+          <p><strong>Fecha: </strong>${reporte.fecha || "Sin fecha"}</p>
           <div class="mt-2 space-x-2">
             <button data-editar="${index}" class="bg-yellow-400 hover:bg-yellow-500 text-black px-2 py-1 rounded">
               Editar
@@ -36,10 +30,8 @@
       lista.appendChild(item);
     });
   }
-
   window.addEventListener("storage", render);
   window.addEventListener("DOMContentLoaded", render);
-
   lista.addEventListener("click", (e) => {
     if (e.target.dataset.editar !== undefined) {
       const index = parseInt(e.target.dataset.editar);
