@@ -2,11 +2,33 @@
   <ul id="lista-reportes" class="space-y-4 flex grid-item flex-col gap-4"></ul>
 </div>
 <script type="module">
-  const lista = document.getElementById("lista-reportes");
-  function render() {
-    const reportes = JSON.parse(localStorage.getItem("reportes") || "[]");
-    lista.innerHTML = "";
-    reportes.forEach((reporte, index) => {
+  // Cargar jsPDF dinámicamente
+  async function loadJsPDF() {
+    if (!window.jspdf) {
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+      script.integrity = 'sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmLzB9wtWPHIeakq1bR0JfNn73fL7/YjBf4IQwY8j7hZv2DdbA==';
+      script.crossOrigin = 'anonymous';
+      script.referrerPolicy = 'no-referrer';
+      document.head.appendChild(script);
+      
+      return new Promise((resolve, reject) => {
+        script.onload = () => resolve(window.jspdf);
+        script.onerror = () => reject(new Error('Error al cargar jsPDF'));
+      });
+    }
+    return Promise.resolve(window.jspdf);
+  }
+
+  // Esperar a que el DOM esté completamente cargado
+  document.addEventListener('DOMContentLoaded', () => {
+    const lista = document.getElementById("lista-reportes");
+    
+    function render() {
+      // Usamos sessionStorage en lugar de localStorage para que los datos se borren al cerrar la pestaña
+      const reportes = obtenerReportes();
+      lista.innerHTML = "";
+      reportes.forEach((reporte, index) => {
       const item = document.createElement("li");
       item.className =
         "border border-gray-300 dark:border-gray-600 p-1 rounded";
@@ -42,36 +64,98 @@
       lista.appendChild(item);
     });
   }
-  window.addEventListener("storage", render);
-  window.addEventListener("DOMContentLoaded", render);
+  // Función para obtener los reportes actuales
+  function obtenerReportes() {
+    return JSON.parse(sessionStorage.getItem('reportes') || '[]');
+  }
+
+  // Función para guardar los reportes
+  function guardarReportes(reportes) {
+    sessionStorage.setItem('reportes', JSON.stringify(reportes));
+    // Forzar actualización en otras pestañas
+    const event = new StorageEvent('storage', {
+      key: 'reportes',
+      newValue: JSON.stringify(reportes),
+      storageArea: sessionStorage
+    });
+    window.dispatchEvent(event);
+  }
+
+    // Escuchar cambios en el storage
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'reportes') {
+        render();
+      }
+    });
+
+    // Inicializar si no existe
+    if (!sessionStorage.getItem('reportes')) {
+      sessionStorage.setItem('reportes', '[]');
+    }
+    
+    // Renderizar la lista inicial
+    render();
   async function generarPDF(reporte) {
     try {
-      if (!window.jspdf) {
-        throw new Error('La biblioteca jsPDF no está cargada');
-      }
+      await loadJsPDF();
       
       const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
+      const doc = new jsPDF({
+        orientation: 'p',
+        unit: 'mm',
+        format: 'a4'
+      });
       
-      // Cargar y agregar el logo
       try {
-        const logoUrl = '/Ambicon.svg';
-        const response = await fetch(logoUrl);
-        if (!response.ok) throw new Error('Error al cargar el logo');
+        // Usar una URL absoluta para el logo
+        const logoUrl = new URL('/Ambicon.svg', window.location.origin).href;
+        const img = new Image();
+        img.crossOrigin = 'Anonymous';
         
-        const blob = await response.blob();
-        const imgData = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onloadend = () => resolve(reader.result);
-          reader.onerror = reject;
-          reader.readAsDataURL(blob);
+        // Cargar la imagen SVG
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = (e) => {
+            console.error('Error al cargar el logo:', e);
+            reject(e);
+          };
+          img.src = logoUrl;
         });
         
-        // Agregar el logo en la parte superior del documento
-        doc.addImage(imgData, 'SVG', 20, 10, 30, 30);
+        // Crear un canvas con el tamaño exacto que necesitamos
+        const canvas = document.createElement('canvas');
+        const size = 60; // Tamaño más grande para mejor calidad
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        
+        // Configuración de máxima calidad
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        
+        // Dibujar la imagen en el canvas
+        ctx.drawImage(img, 0, 0, size, size);
+        
+        // Obtener la imagen en la mejor calidad posible
+        const imgData = canvas.toDataURL('image/png', 1.0);
+        
+        // Agregar la imagen al PDF con la mejor calidad
+        doc.addImage({
+          imageData: imgData,
+          x: 20,
+          y: 10,
+          width: 30,
+          height: 30,
+          compression: 'NONE',
+          alias: 'logo',
+          rotation: 0
+        });
+        
       } catch (error) {
         console.warn('No se pudo cargar el logo:', error);
-        // Continuar sin el logo si hay error
+        // Agregar un rectángulo como fallback
+        doc.setFillColor(200, 200, 200);
+        doc.rect(20, 10, 30, 30, 'F');
       }
       
       // Título del documento
@@ -106,53 +190,68 @@
       alert('Error al generar el PDF. Por favor, inténtalo de nuevo.');
     }
   }
-  lista.addEventListener("click", (e) => {
-    if (e.target.dataset.editar !== undefined) {
-      const index = parseInt(e.target.dataset.editar);
+    // Agregar el event listener a la lista
+    lista.addEventListener("click", (e) => {
+      const button = e.target.closest('button');
+      if (!button) return;
+
+    if (button.dataset.editar !== undefined) {
+      const index = parseInt(button.dataset.editar);
       window.dispatchEvent(
-        new CustomEvent("editar-reporte", { detail: index }),
+        new CustomEvent("editar-reporte", { detail: index })
       );
     }
-    if (e.target.dataset.descargar !== undefined) {
-      try {
-        const index = parseInt(e.target.dataset.descargar);
-        const reportes = JSON.parse(localStorage.getItem("reportes") || "[]");
-        const reporte = reportes[index];
+    if (button.dataset.descargar !== undefined) {
+      const index = parseInt(button.dataset.descargar);
+      const reportes = obtenerReportes();
+      
+      if (index < 0 || index >= reportes.length) {
+        console.error('Índice de reporte inválido para descargar');
+        return;
+      }
+      
+      const reporte = reportes[index];
+      
+      // Deshabilitar temporalmente el botón para evitar múltiples clics
+      const boton = button;
+      const textoOriginal = boton.innerHTML;
+      boton.disabled = true;
+      boton.innerHTML = 'Generando...';
+      
+      // Generar PDF
+      generarPDF(reporte)
+        .then(() => {
+          // Restaurar el botón después de generar el PDF
+          boton.disabled = false;
+          boton.innerHTML = textoOriginal;
+        })
+        .catch(error => {
+          console.error('Error al generar el PDF:', error);
+          alert('Error al generar el PDF. Por favor, inténtalo de nuevo.');
+          boton.disabled = false;
+          boton.innerHTML = textoOriginal || 'Descargar PDF';
+        });
+    }
+    if (button.dataset.eliminar !== undefined) {
+      if (confirm('¿Estás seguro de que deseas eliminar este reporte?')) {
+        const index = parseInt(button.dataset.eliminar);
+        const reportes = obtenerReportes();
         
-        // Deshabilitar temporalmente el botón para evitar múltiples clics
-        const boton = e.target.closest('button');
-        const textoOriginal = boton.innerHTML;
-        boton.disabled = true;
-        boton.innerHTML = 'Generando...';
-        
-        // Generar PDF
-        generarPDF(reporte)
-          .then(() => {
-            // Restaurar el botón después de generar el PDF
-            boton.disabled = false;
-            boton.innerHTML = textoOriginal;
-          })
-          .catch(error => {
-            console.error('Error al generar el PDF:', error);
-            alert('Error al generar el PDF. Por favor, inténtalo de nuevo.');
-            boton.disabled = false;
-            boton.innerHTML = textoOriginal || 'Descargar PDF';
-          });
-      } catch (error) {
-        console.error('Error al generar el PDF:', error);
-        alert('Error al generar el PDF. Por favor, inténtalo de nuevo.');
-        // Asegurarse de restaurar el botón en caso de error
-        const boton = e.target.closest('button');
-        boton.disabled = false;
-        boton.innerHTML = textoOriginal || 'Descargar PDF';
+        if (index >= 0 && index < reportes.length) {
+          // Crear una nueva copia del array sin el elemento a eliminar
+          const nuevosReportes = reportes.filter((_, i) => i !== index);
+          
+          // Guardar los cambios
+          guardarReportes(nuevosReportes);
+          
+          // Actualizar la UI
+          render();
+        } else {
+          console.error('Índice de reporte inválido');
+          alert('Error: No se pudo eliminar el reporte. Índice inválido.');
+        }
       }
     }
-    if (e.target.dataset.eliminar !== undefined) {
-      const index = parseInt(e.target.dataset.eliminar);
-      const reportes = JSON.parse(localStorage.getItem("reportes") || "[]");
-      reportes.splice(index, 1);
-      localStorage.setItem("reportes", JSON.stringify(reportes));
-      render();
-    }
-  });
+    }); // Cierre del event listener de la lista
+  }); // Cierre del DOMContentLoaded
 </script>

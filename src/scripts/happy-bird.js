@@ -25,13 +25,13 @@ let playButton = {
 
 let logo = {
     x: boardWidth / 2 - 300 / 2,
-    y: boardHeigth / 4,
+    y: boardHeigth / 6,
     width: 300,
     height: 100
 };
 
 let flappyBirdTextImg = new Image();
-flappyBirdTextImg.src = "./img/flappyBirdLogo.png";
+flappyBirdTextImg.src = "./img/track2.png";
 let gameOverImg = new Image();
 gameOverImg.src = "./img/flappy-gameover.png";
 
@@ -98,7 +98,7 @@ window.onload = function () {
         playButton.x = boardWidth / 2 - playButton.width / 2;
         playButton.y = boardHeigth / 2 - playButton.height / 2;
         logo.x = boardWidth / 2 - logo.width / 2;
-        logo.y = boardHeigth / 4;
+        logo.y = boardHeigth / 6;  // Ajustado para que coincida con la posición inicial
         bird.y = boardHeigth / 2;
         birdY = boardHeigth / 2;
     }

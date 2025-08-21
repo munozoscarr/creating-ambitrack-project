@@ -22,8 +22,35 @@
   </form>
 </div>
 <script type="module">
-  window.addEventListener('DOMContentLoaded', () => {
-    let reportes = JSON.parse(localStorage.getItem('reportes') || '[]');
+  // Función para obtener los reportes actuales
+  function obtenerReportes() {
+    try {
+      return JSON.parse(sessionStorage.getItem('reportes') || '[]');
+    } catch (error) {
+      console.error('Error al obtener reportes:', error);
+      return [];
+    }
+  }
+
+  // Función para guardar los reportes
+  function guardarReportes(nuevosReportes) {
+    try {
+      sessionStorage.setItem('reportes', JSON.stringify(nuevosReportes));
+      // Forzar actualización en otras pestañas
+      const event = new StorageEvent('storage', {
+        key: 'reportes',
+        newValue: JSON.stringify(nuevosReportes),
+        storageArea: sessionStorage
+      });
+      window.dispatchEvent(event);
+    } catch (error) {
+      console.error('Error al guardar reportes:', error);
+    }
+  }
+
+  // Esperar a que el DOM esté completamente cargado
+  document.addEventListener('DOMContentLoaded', () => {
+    let reportes = obtenerReportes();
     let editIndex = null;
     const form = document.getElementById('formulario-reporte');
     const tipo = document.getElementById('tipo');
@@ -32,41 +59,88 @@
 
     function guardarReporte(reporte) {
       reportes.push(reporte);
+      guardarReportes(reportes);
     }
-    function guardarEnLocalStorage() {
-      localStorage.setItem('reportes', JSON.stringify(reportes));
-      window.dispatchEvent(new Event('storage')); // Para actualizar ListaReportes
+
+    function limpiarFormulario() {
+      tipo.value = '';
+      zona.value = '';
+      descripcion.value = '';
+      editIndex = null;
+    }
+
+    function validarFormulario() {
+      if (!tipo.value.trim() || !zona.value.trim() || !descripcion.value.trim()) {
+        alert('Por favor completa todos los campos');
+        return false;
+      }
+      return true;
     }
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+      
+      if (!validarFormulario()) return;
+      
       const nuevoReporte = {
         tipo: tipo.value.trim(),
         zona: zona.value.trim(),
         descripcion: descripcion.value.trim(),
-        estado: "En revisión"
+        estado: "En revisión",
+        fecha: new Date().toISOString()
       };
-      if (editIndex !== null) {
-        reportes[editIndex] = nuevoReporte;
-        editIndex = null;
-      } else {
-        guardarReporte(nuevoReporte);
+
+      try {
+        // Obtener reportes actuales
+        reportes = obtenerReportes();
+        
+        if (editIndex !== null) {
+          // Actualizar reporte existente
+          reportes[editIndex] = nuevoReporte;
+        } else {
+          // Agregar nuevo reporte
+          reportes.push(nuevoReporte);
+        }
+        
+        // Guardar cambios
+        guardarReportes(reportes);
+        
+        // Limpiar formulario
+        limpiarFormulario();
+        
+        // Notificar que se actualizó la lista
+        window.dispatchEvent(new Event('reporte-actualizado'));
+        
+      } catch (error) {
+        console.error('Error al guardar el reporte:', error);
+        alert('Ocurrió un error al guardar el reporte');
       }
-      guardarEnLocalStorage();
-      // Limpiar campos
-      tipo.value = "";
-      zona.value = "";
-      descripcion.value = "";
     });
 
     // Escuchar evento personalizado para editar desde ListaReportes
     window.addEventListener('editar-reporte', (e) => {
-      const index = e.detail;
-      const r = reportes[index];
-      tipo.value = r.tipo;
-      zona.value = r.zona;
-      descripcion.value = r.descripcion;
-      editIndex = index;
+      try {
+        const index = e.detail;
+        reportes = obtenerReportes(); // Actualizar lista de reportes
+        
+        if (index >= 0 && index < reportes.length) {
+          const r = reportes[index];
+          tipo.value = r.tipo || '';
+          zona.value = r.zona || '';
+          descripcion.value = r.descripcion || '';
+          editIndex = index;
+          
+          // Hacer scroll al formulario para mejor experiencia de usuario
+          form.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          console.error('Índice de edición inválido:', index);
+        }
+      } catch (error) {
+        console.error('Error al cargar el reporte para edición:', error);
+      }
     });
+    
+    // Inicializar con reportes actuales
+    reportes = obtenerReportes();
   });
 </script>
