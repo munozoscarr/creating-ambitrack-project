@@ -2,10 +2,8 @@
 import "../styles/global.css";
 import "leaflet/dist/leaflet.css";
 import SidebarMenu from "../components/SidebarMenu.astro";
-// import Login from "../pages/login.astro";
 const { title, description, showGrid = true, showFooter = true } = Astro.props;
 ---
-
 <!doctype html>
 <html lang="es" class="lg:overflow-y-auto">
   <head>
@@ -14,6 +12,7 @@ const { title, description, showGrid = true, showFooter = true } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/Ambicon.svg" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const gridItems = document.querySelectorAll(".grid-item");
@@ -47,7 +46,6 @@ const { title, description, showGrid = true, showFooter = true } = Astro.props;
 <body class="relative">
   {showGrid && <div class="cuadricula"></div>}
   <div class="cursor-punto"></div>
-  <!-- <Login /> -->
   <header class="w-full h-header-container absolute z-30">
     <div class="px-11 h-full flex items-center justify-between">
       <div class="flex gap-5 items-center">
@@ -84,7 +82,7 @@ const { title, description, showGrid = true, showFooter = true } = Astro.props;
       <main id="main-hidden" class="">
         <slot />
       </main>
-      {showFooter && <footer class="flex items-center justify-center mb-6 mt-28">
+      { showFooter &&  <footer class="flex items-center justify-center mb-6 mt-28">
         <div class="flex items-center gap-6">
           <a
             href=""
@@ -199,7 +197,6 @@ const { title, description, showGrid = true, showFooter = true } = Astro.props;
     >
   </button>
 </body>
-
 <script>
   window.addEventListener("scroll", () => {
     const button_top = document.getElementById(
